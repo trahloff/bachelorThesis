@@ -14,7 +14,7 @@
 %% der entsprechenden Sprache angezeigt, sondern auch weitere
 %% Aspekte angepasst, wie z.B. die Anführungszeichen und
 %% Datumsformate.
-\setzesprache{de} % oder en
+\setzesprache{en} % oder en
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Angaben  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -44,18 +44,17 @@
 %% einmal für jede Sprache), biber in bibtex ändern.
 \newcommand{\ladeliteratur}{%
 \addbibresource{bibliographie.bib}
-%\addbibresource{weitereDatei.bib}
+\addbibresource{mendeley.bib}
 }
 %% Zitierstil
-%% siehe: http://ctan.mirrorcatalogs.com/macros/latex/contrib/biblatex/doc/biblatex.pdf (3.3.1 Citation Styles)
+%% siehe: https://www.sharelatex.com/learn/Biblatex_citation_styles
 %% mögliche Werte z.B numeric-comp, alphabetic, authoryear
-\setzezitierstil{numeric-comp}
+\setzezitierstil{authoryear-icomp}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Verschiedene Schriftarten
-% laut nag Warnung: palatino obsolete, use mathpazo, helvet (option scaled=.95), courier instead
-\setzeschriftart{lmodern} % palatino oder goudysans, lmodern, libertine
+\setzeschriftart{mathpazo} % palatino oder goudysans, lmodern, libertine
 
 %% Paket um Textteile drehen zu können
 %\usepackage{rotating}
@@ -77,7 +76,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Verschiedenes  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Farben (Angabe in HTML-Notation mit großen Buchstaben)
 \newcommand{\ladefarben}{%
-	\definecolor{LinkColor}{HTML}{00007A}
+	\definecolor{LinkColor}{HTML}{3B5998}
 	\definecolor{ListingBackground}{HTML}{FCF7DE}
 }
 %% Mathematikpakete benutzen (Pakete aktivieren)

@@ -1,14 +1,8 @@
 %%**************************************************************
-%% Vorlage fuer Bachelorarbeiten (o.ä.) der DHBW
+%% Bachelor Thesis 2018
 %%
-%% Autor: Tobias Dreher, Yves Fischer
-%% Datum: 06.07.2011
+%% Autor: Tobias Rahloff
 %%
-%% Autor: Michael Gruben
-%% Datum: 15.05.2013
-%%
-%% Autor: Markus Barthel
-%% Datum: 22.08.2014
 %%**************************************************************
 
 \input{ads/header}
@@ -27,12 +21,8 @@
 	\pagenumbering{Roman}
 
 	% Sperrvermerk
-	\input{ads/sperrvermerk}
-	\newpage
-
-	% Erklärung
-	\input{ads/erklaerung}
-	\newpage
+% 	\input{ads/sperrvermerk}
+% 	\newpage
 
 	% Abstract
 	\input{ads/abstract}
@@ -61,6 +51,27 @@
 	\end{spacing}
 	\newpage
 
+	\pagenumbering{arabic}
+	
+	\pagestyle{headings}		% Kolumnentitel im Kopf, Seitenzahlen im Fuß
+
+	% Examples
+    % \input{content/examples/01kapitel.tex}
+    % \input{content/examples/02kapitel.tex}
+	
+	% Inhalt
+	\input{content/01introduction/master.tex}
+	\input{content/02theoreticalBackground/master.tex}
+	\input{content/03researchMethod/master.tex}
+	\input{content/04design/master.tex}
+	\input{content/05validation/master.tex}
+	\input{content/06discussion/master.tex}
+	
+    
+	\clearpage
+	
+	\pagenumbering{Roman}
+
 	% Abkürzungsverzeichnis
 	\cleardoublepage
 	\input{ads/acronyms}
@@ -78,25 +89,6 @@
 	\lstlistoflistings
 	\cleardoublepage
 
-	\pagenumbering{arabic}
-	
-	\pagestyle{headings}		% Kolumnentitel im Kopf, Seitenzahlen im Fuß
-
-	% Examples
-	\input{content/examples/01kapitel.tex}
-	\input{content/examples/02kapitel.tex}
-	
-	% Inhalt
-	\input{content/01introduction/master.tex}
-	\input{content/02researchMethod/master.tex}
-	\input{content/03theoreticalBackground/master.tex}
-	\input{content/04design/master.tex}
-	\input{content/05validation/master.tex}
-	\input{content/06discussion/master.tex}
-	
-    
-	\clearpage
-
 	% Literaturverzeichnis
 	\cleardoublepage
 	\printbibliography
@@ -108,5 +100,10 @@
 	\clearpage
 	\appendix
 	\input{ads/appendix}
+
+	% Erklärung
+	\cleardoublepage
+	\input{ads/erklaerung}
+	\newpage
 	
 \end{document}

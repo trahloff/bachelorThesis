@@ -128,6 +128,7 @@
 	bibencoding=utf8,	% wenn .bib in utf8, sonst ascii
 	sortlocale=de_DE,
 	style=\zitierstil,
+	citestyle=\citestyle,
 ]{biblatex}
 }
 \iflang{en}{%
@@ -137,8 +138,14 @@
 	bibencoding=utf8,	% wenn .bib in utf8, sonst ascii
 	sortlocale=en_US,
 	style=\zitierstil,
+	citestyle=\citestyle,
 ]{biblatex}
 }
+% Custom Workaround for Baumgart Style (Author, Title, Year) w/ continuous counted footnote
+\usepackage{xpatch}
+\usepackage{chngcntr}
+\xapptobibmacro{cite}{\setunit{\nametitledelim}\printfield{year}}{}{}
+\counterwithout{footnote}{chapter}
 
 \ladeliteratur{}
 

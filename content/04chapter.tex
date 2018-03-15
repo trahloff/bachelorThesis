@@ -1,8 +1,28 @@
-\section{Problem Definition}
+\chapter{Background}
+
+
+%===================================================================================================%
+\section{Introduction}
+%===================================================================================================%
+
+
+%===================================================================================================%
+\section{Systematic Literature Review}
+%===================================================================================================%
+
+
+%===================================================================================================%
+\section{Internet of Things}
+%===================================================================================================%
+
+
+%===================================================================================================%
+\section{Stream Processing}
+%===================================================================================================%
 
 Event Stream Processing (or shorter \textit{Stream Processing} has become one of the most common computing tasks enterprise systems face today. As defined by the Gartner Research Institute,
 \blockquote{An event stream is a sequence of event objects arranged in some order, typically by time. \acf{ESP} is any kind of computing performed on event streams.}\autocite{Schulte2017TechnologyProcessing}\\
-In other words, \acf{ESP} processes data \textit{directly} as it is produced by nodes (i.e. applications, sensors, ...). An "event" is often just defined as a "notable thing that happens".\autocite{Michelson2011ElementalOverview} This is a very broad definition that has to be revised and adapted to the specific use-case at hand but a shared characteristic is that all events contain information, are generated as a byproduct of the occurrence of something and can be associated with a specific point in time. 
+In other words, \acf{ESP} processes data \textit{directly} as it is produced by nodes (i.e. applications, sensors, ...). An "event" is often just defined as a "notable thing that happens".\autocite{Michelson2011Event-DrivenOverview} This is a very broad definition that has to be revised and adapted to the specific use-case at hand but a shared characteristic is that all events contain information, are generated as a byproduct of the occurrence of something and can be associated with a specific point in time. 
 Since many real world scenarios such as sensor measurements, financial trades, and so forth regularly result in a continuous stream of events, \acf{ESP} is often a viable architectural approach.\\
 The traditional solution for this challenge is to store the data in a database and let applications query the data as needed or as scheduled. As depicted in \ref{fig:dataRest}, the occurring events are sent from an application or sensor to an endpoint where they are stored at rest and the computation of said events has to be scheduled and managed. It is important to note that the information flow in this model centers around the data storage. First the information flows from the source to it and after that the downstream applications have to make some kind of request to it to access the information.
 
@@ -15,7 +35,7 @@ The traditional solution for this challenge is to store the data in a database a
 \end{figure}
 
 With Stream Processing however, a continuous data flow from left to right is established. Upon receiving an event from the stream, the \acf{ESP} application performs a task based on the event. For instance, this could be a transformation of the events properties in order to match system-wide standards (e.g., unit conversation). 
-\ref{fig:dataStream} shows a simplified example of this pattern. Similarly to \ref{fig:dataRest}, applications, sensors or other clients continuously generate events that are sent to an endpoint but instead of storing the data, it is directly processed by the assigned application. As indicated by the two arrows that lead from two streams to one single application, it is likewise possible to process multiple streams jointly and merge numerous information flows. The so-called \textit{stream processors} directly react upon receiving the events as mentioned before. 
+Figure \ref{fig:dataStream} shows a simplified example of this pattern. Similarly to figure \ref{fig:dataRest}, applications, sensors or other clients continuously generate events that are sent to an endpoint but instead of storing the data, it is directly processed by the assigned application. As indicated by the two arrows that lead from two streams to one single application, it is likewise possible to process multiple streams jointly and merge numerous information flows. The so-called \textit{stream processors} directly react upon receiving the events as mentioned before. 
 
 \begin{figure}[ht]
     \includegraphics[width=\linewidth]{images/streaming/streming_data.png}\centering
@@ -32,10 +52,42 @@ Due to recent trends in the industry such as IoT and Industry 4.0, the amount of
 Many companies such as Netflix\footnote{\url{https://aws.amazon.com/solutions/case-studies/netflix-kinesis-streams/}} or Uber\footnote{\url{https://flink.apache.org/poweredby}} adopted stream-processing patterns in combination with serverless computing to take on challenges that demand highly scale able and performant systems. 
 This approach is particularly favourable for companies that deliver IoT solutions such as Toyota\footnote{\url{https://aws.amazon.com/solutions/case-studies/toyota-tsusho/}} or Quest\footnote{\url{https://customers.microsoft.com/en-us/story/quest}}.
 
+
+%===================================================================================================%
+\section{Serverless}
+%===================================================================================================%
+
 Traditional approaches such as monolithic on-premise systems and even \acf{PaaS} based solutions or container clusters can be an option but have their own advantages and caveats. As shown in Figure \ref{fig:slessCompared}
 (page \pageref{fig:slessCompared}), Hammond and Ryner identify six major categories to characterize architectural approaches.\\
 \textbf{State Management} is one of the areas where \textit{monolithic apps} have the most obvious advantage. The state is shared and global which reduces the required state management to a bare minimum. Since \textit{monolithic apps} are defined as one single system that offers many services using different interfaces that share the same global state. \autocite{Villamizar2015EvaluatingCloud} The management of this state is therefore not particularly complex and can be done inside of the system. For availability reasons, it might be a good idea to store the state redundantly but this is out of scope for the thesis and does not change the fact that the state of a \textit{monolithic app} is shared and global.\\
 For a \textit{container app} on the other hand, state management is normally limited to the container. Since one of the main design principles of containerization is to confine the system within the boundaries of the container, it is possible to maintain a global shared state within the container itself but not to share it between all system services. If one container dies (e.g., reboot, failure, ...), it's state dies with it. Concepts like state-providers act as an external source of truth that can transfer and preserve state but often add complexity to the system and need to be implemented.\autocite{Ling2004SessionState}\\
-Similarly, state management in serverless applications can be complex due to the confined nature of its code. 
+Similarly, state management in \textit{serverless applications} can be complex due to the confined nature of its code. Since the application is spun up on invocation and only lives on for the computation time it is not possible to maintain state throughout different function invocations.
 
 "Serverless" computing aims to solve those problems.\autocite{Roberts2016ServerlessArchitectures}
+
+
+%===================================================================================================%
+\section{Container}
+%===================================================================================================%
+
+\begin{figure}[ht]
+    \includegraphics[width=\linewidth]{images/serverless/demyst.png}\centering
+    \caption
+    ["Serverless" compared to traditional approaches]
+    {"Serverless" compared to traditional approaches (\cite{Hammond2018DemystifyingComputing})}
+    \label{fig:slessCompared}
+\end{figure}
+
+Problems:
+\begin{enumerate}
+    \item tightly coupled
+    \item hard to scale
+    \item hard to apply eventD models
+    \item Integration (ESB)  Servicefull
+    \item billing unit not tied to business logic
+\end{enumerate}
+
+
+%===================================================================================================%
+\section{Summary}
+%===================================================================================================%

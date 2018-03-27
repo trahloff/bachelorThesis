@@ -87,6 +87,9 @@
 \usepackage{\schriftart}
 \ladefarben{}
 
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+
 % Titel, Autor und Datum
 \title{\titel}
 \author{\autor}
@@ -141,7 +144,7 @@
 	citestyle=\citestyle,
 ]{biblatex}
 }
-% Custom Workaround for Baumgart Style (Author, Title, Year) w/ continuous counted footnote
+% Custom Workaround for Baumgart-Style (Author, Title, Year) 
 \usepackage{xpatch}
 \usepackage{chngcntr}
 \xapptobibmacro{cite}{\setunit{\nametitledelim}\printfield{year}}{}{}

@@ -7,8 +7,8 @@
 
 \input{ads/header}
 
-\makeglossaries
-\input{ads/glossary}
+%\makeglossaries
+%\input{ads/glossary}
 
 \begin{document}
 
@@ -27,6 +27,27 @@
 	% Abstract
 	\input{ads/abstract}
 	\newpage
+	
+	
+	\pagenumbering{Roman}
+
+	% Abkürzungsverzeichnis
+	\cleardoublepage
+	\input{ads/acronyms}
+
+	% Abbildungsverzeichnis
+	\cleardoublepage
+	\listoffigures
+
+	%Tabellenverzeichnis
+	\cleardoublepage
+	\listoftables
+
+	% Quellcodeverzeichnis
+	\cleardoublepage
+	\lstlistoflistings
+	\cleardoublepage
+
 
 	\pagestyle{plain}		% nur Seitenzahlen im Fuß
 	
@@ -41,7 +62,7 @@
 			\pagestyle{empty}
 			
 			
-			\setcounter{tocdepth}{1}
+			\setcounter{tocdepth}{3}
 			%für die Anzeige von Unterkapiteln im Inhaltsverzeichnis
 			%\setcounter{tocdepth}{2}
 			
@@ -78,33 +99,11 @@
 	}
 	
     
-	\clearpage
-	
-	\pagenumbering{Roman}
-
-	% Abkürzungsverzeichnis
-	\cleardoublepage
-	\input{ads/acronyms}
-
-	% Abbildungsverzeichnis
-	\cleardoublepage
-	\listoffigures
-
-	%Tabellenverzeichnis
-	\cleardoublepage
-	\listoftables
-
-	% Quellcodeverzeichnis
-	\cleardoublepage
-	\lstlistoflistings
-	\cleardoublepage
 
 	% Literaturverzeichnis
 	\cleardoublepage
 	\printbibliography
 
-	% Glossar
-	\printglossary[style=altlist,title=\langglossar]
 	
 	% sonstiger Anhang
 	\clearpage

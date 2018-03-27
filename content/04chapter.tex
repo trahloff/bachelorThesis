@@ -1,4 +1,4 @@
-\chapter{Background}
+\chapter{Research Method}
 
 
 %===================================================================================================%
@@ -7,85 +7,56 @@
 
 
 %===================================================================================================%
-\section{Systematic Literature Review}
-%===================================================================================================%
+\section{Method Evaluation}
+%=======================================================%
+
+TTF vs ReqEng+FVM ?
+
+"Characteristics" für Streaming und beide techs feststellen
 
 
 %===================================================================================================%
-\section{Internet of Things}
-%===================================================================================================%
+\section{Prototyping}
+%=======================================================%
 
+managed container: IBM IoTP\\
+serverless: AWS Kinesis+Firehose+Lambda
 
-%===================================================================================================%
-\section{Stream Processing}
-%===================================================================================================%
+%***************%
+\section{Requirement Engineering and Operationalization}\label{sec:operationalization}
+%***************%
 
-Event Stream Processing (or shorter \textit{Stream Processing} has become one of the most common computing tasks enterprise systems face today. As defined by the Gartner Research Institute,
-\blockquote{An event stream is a sequence of event objects arranged in some order, typically by time. \acf{ESP} is any kind of computing performed on event streams.}\autocite{Schulte2017TechnologyProcessing}\\
-In other words, \acf{ESP} processes data \textit{directly} as it is produced by nodes (i.e. applications, sensors, ...). An "event" is often just defined as a "notable thing that happens".\autocite{Michelson2011Event-DrivenOverview} This is a very broad definition that has to be revised and adapted to the specific use-case at hand but a shared characteristic is that all events contain information, are generated as a byproduct of the occurrence of something and can be associated with a specific point in time. 
-Since many real world scenarios such as sensor measurements, financial trades, and so forth regularly result in a continuous stream of events, \acf{ESP} is often a viable architectural approach.\\
-The traditional solution for this challenge is to store the data in a database and let applications query the data as needed or as scheduled. As depicted in \ref{fig:dataRest}, the occurring events are sent from an application or sensor to an endpoint where they are stored at rest and the computation of said events has to be scheduled and managed. It is important to note that the information flow in this model centers around the data storage. First the information flows from the source to it and after that the downstream applications have to make some kind of request to it to access the information.
+%***************%
+\subsection{Viability Assessment}
+%***************%
+
+wie einfach war das deployment, blah
 
 \begin{figure}[ht]
-    \includegraphics[width=\linewidth]{images/streaming/data_at_rest.png}\centering
+    \includegraphics[width=0.7\linewidth]{images/methodology/fvm.jpg}\centering
     \caption
-    [Data-at-Rest Architecture]
-    {Data-at-Rest Architecture (\cite{dataArtisans2017WhatProcessing})}
-    \label{fig:dataRest}
+    [Fit-Viability-Model]
+    {Fit-Viability-Model \cite{Liang2007AdoptionModel}}
 \end{figure}
 
-With Stream Processing however, a continuous data flow from left to right is established. Upon receiving an event from the stream, the \acf{ESP} application performs a task based on the event. For instance, this could be a transformation of the events properties in order to match system-wide standards (e.g., unit conversation). 
-Figure \ref{fig:dataStream} shows a simplified example of this pattern. Similarly to figure \ref{fig:dataRest}, applications, sensors or other clients continuously generate events that are sent to an endpoint but instead of storing the data, it is directly processed by the assigned application. As indicated by the two arrows that lead from two streams to one single application, it is likewise possible to process multiple streams jointly and merge numerous information flows. The so-called \textit{stream processors} directly react upon receiving the events as mentioned before. 
+%***************%
+\subsection{Suitability Assessment}
+%***************%
 
-\begin{figure}[ht]
-    \includegraphics[width=\linewidth]{images/streaming/streming_data.png}\centering
-    \caption
-    [Stream Processing Architecture]
-    {Stream Processing Architecture (\cite{dataArtisans2017WhatProcessing})}
-    \label{fig:dataStream}
-\end{figure}
-
-This seemingly small change to the information flow has some serious implications. To begin with, \acf{ESP} resembles the natural flow of data outside the IT system much closer than scheduled computation and is therefore easier to understand and design for. Secondly, since the event is processed immediately upon being received, the application can react instantly and a lag time between the occurrence of the event, the action trigger and the action itself can be avoided which results in a near real-time processing of information. 
-
-This approach allows for a data-driven and computation-driven perspective on complex business problems that aim to provide dynamic insights and need to handle a steady input of information. 
-Due to recent trends in the industry such as IoT and Industry 4.0, the amount of data that has to be categorized, analyzed and processed skyrocketed. The data-ingress often consists of semi-structured sets and has to be transformed and handled in near real-time.\autocite{Dekate2017PredictsInfrastructure} In order to provide valuable business insights for companies and public sector players alike, this approach is likely not only a temporarily trend but rather a long lasting evolution of the way data-centric enterprise systems are being designed. Moreover, a recent Gartner report predicts that the market for \acf{ESP} solutions will grow by 15\% year over year from 2017 to 2022 (compound annual growth rate).\autocite{Heudecker2017MarketProcessing} \\
-Many companies such as Netflix\footnote{\url{https://aws.amazon.com/solutions/case-studies/netflix-kinesis-streams/}} or Uber\footnote{\url{https://flink.apache.org/poweredby}} adopted stream-processing patterns in combination with serverless computing to take on challenges that demand highly scale able and performant systems. 
-This approach is particularly favourable for companies that deliver IoT solutions such as Toyota\footnote{\url{https://aws.amazon.com/solutions/case-studies/toyota-tsusho/}} or Quest\footnote{\url{https://customers.microsoft.com/en-us/story/quest}}.
-
-
-%===================================================================================================%
-\section{Serverless}
-%===================================================================================================%
-
-Traditional approaches such as monolithic on-premise systems and even \acf{PaaS} based solutions or container clusters can be an option but have their own advantages and caveats. As shown in Figure \ref{fig:slessCompared}
-(page \pageref{fig:slessCompared}), Hammond and Ryner identify six major categories to characterize architectural approaches.\\
-\textbf{State Management} is one of the areas where \textit{monolithic apps} have the most obvious advantage. The state is shared and global which reduces the required state management to a bare minimum. Since \textit{monolithic apps} are defined as one single system that offers many services using different interfaces that share the same global state. \autocite{Villamizar2015EvaluatingCloud} The management of this state is therefore not particularly complex and can be done inside of the system. For availability reasons, it might be a good idea to store the state redundantly but this is out of scope for the thesis and does not change the fact that the state of a \textit{monolithic app} is shared and global.\\
-For a \textit{container app} on the other hand, state management is normally limited to the container. Since one of the main design principles of containerization is to confine the system within the boundaries of the container, it is possible to maintain a global shared state within the container itself but not to share it between all system services. If one container dies (e.g., reboot, failure, ...), it's state dies with it. Concepts like state-providers act as an external source of truth that can transfer and preserve state but often add complexity to the system and need to be implemented.\autocite{Ling2004SessionState}\\
-Similarly, state management in \textit{serverless applications} can be complex due to the confined nature of its code. Since the application is spun up on invocation and only lives on for the computation time it is not possible to maintain state throughout different function invocations.
-
-"Serverless" computing aims to solve those problems.\autocite{Roberts2016ServerlessArchitectures}
-
-
-%===================================================================================================%
-\section{Container}
-%===================================================================================================%
-
-\begin{figure}[ht]
-    \includegraphics[width=\linewidth]{images/serverless/demyst.png}\centering
-    \caption
-    ["Serverless" compared to traditional approaches]
-    {"Serverless" compared to traditional approaches (\cite{Hammond2018DemystifyingComputing})}
-    \label{fig:slessCompared}
-\end{figure}
-
-Problems:
 \begin{enumerate}
-    \item tightly coupled
-    \item hard to scale
-    \item hard to apply eventD models
-    \item Integration (ESB)  Servicefull
-    \item billing unit not tied to business logic
+    \item scaleabilitty
+    \item microbilling
+    \item loosely coupled
+    \item event-driven
 \end{enumerate}
+
+
+\begin{figure}[ht]
+    \includegraphics[width=0.7\linewidth]{images/methodology/ttf.jpg}\centering
+    \caption
+    [Task-Technology-Fit Model]
+    {Task-Technology-Fit Model \cite{Goodhue1995Task-TechnologyPerformance}}
+\end{figure}
 
 
 %===================================================================================================%

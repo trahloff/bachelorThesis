@@ -36,7 +36,7 @@ Take the case of an online-shop. Its extremely simplified architecture diagram o
 %     \caption {Classic Three-Tier Architecture with multiple Clients}
 %     \label{fig:3tierNclient}
 % \end{figure}
-The amount of steps that have to be performed concurrently to process every request in a timely manner grows with every added client but since a server operates on a finite amount of resources, eventually a performance-wise degradation of service occurs. Traditionally, more servers and therefore more available compute power would be added to the system to cope with this challenge. Unfortunately, this approach results in a very inelastic provision of resources which is illustrated in Figure \ref{graph:provisionedComputePowerServer}. To further simplify, let's assume that every server can handle exactly 1000 clients. If 1001 clients simultaneously connect to the system, at least two servers have to be running to satisfy the calls. 
+The amount of steps that have to be performed concurrently to process every request in a timely manner grows with every added client but since a server operates on a finite amount of resources, eventually a performance-wise degradation of service occurs. Traditionally, more servers and therefore more available compute power would be added to the system to cope with this challenge. Unfortunately, this approach results in a very inelastic provision of resources which is illustrated in Figure \ref{graph:provisionedComputePowerServer}. To further simplify, let's assume that every server can handle exactly 1000 clients. If 1001 clients simultaneously connect to the system, at least two servers have to be running to satisfy the calls. This means there it is never possible to accurately provision just the right amount of processing power for the incoming request but always too much or not enough. 
 
 \begin{figure}[ht]
     \begin{tikzpicture}
@@ -59,15 +59,15 @@ The amount of steps that have to be performed concurrently to process every requ
     \label{graph:provisionedComputePowerServer}
 \end{figure}
 
+With a serverless approach on the other hand, for every client request, the function that executes the steps necessary to fulfill the request is initiated with it's own small runtime. How this works from a technical perspective is discussed later on in chapter \ref{sec:serverless} on page \pageref{sec:serverless} A drastically simplified sketch of this approach can be seen in Figure \ref{fig:serverlessArchHighlevel}. The gateway is an API endpoint that reroutes incoming requests to a server, or in this case a serverless function that is initiated. \autocite{Kelly2010UsingInvalidation} This gateway distributes the calls to the newly spun-up functions which is called "fan-out"\autocite{Do2013Limplock}, a term that describes how the system structure fans out after the gateway. 
+
 \begin{figure}[ht]
     \includegraphics[width=\linewidth]{images/drawio/lambda.png}\centering
     \caption {Serverless Architecture (simplified)}
     \label{fig:serverlessArchHighlevel}
 \end{figure}
 
-
-As depicted in Figure \ref{fig:serverlessArchHighlevel} \textcolor{red}{TODO: Dienstag}
-\ref{graph:provisionedComputePowerServer} shows how this bottleneck scales
+Since the amount of running functions is directly proportional to the number of incoming requests, the system always provisions the exact processing power needed to sufficiently handle the load. In comparison, this strategy is way more efficient, which can be seen in Figure \ref{graph:provisionedComputePowerComparison}.
 
 \begin{figure}[ht]
     \begin{tikzpicture}

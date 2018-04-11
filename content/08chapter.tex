@@ -1,4 +1,4 @@
-\chapter{Viability Assessment}
+\chapter{Viability Assessment}\label{chp:viabilityAssessment}
 
 
 %===================================================================================================%
@@ -10,11 +10,40 @@
 \section{Containerized Application}
 %===================================================================================================%
 
+\textbf{Properties that are rather positive:}
+\begin{enumerate}
+    \item easier to migrate to
+\end{enumerate}
+
+\textbf{Properties that can have neutral or negative effect:}
+\begin{enumerate}
+    \item "staircase" scalability (non-linear)
+    \item not immutable -> operational drift
+    \item provisioning
+    \item managemnet of container image
+    \item optimizations have non-linear effects
+    \item self-healing is always a problem
+\end{enumerate}
 
 %===================================================================================================%
 \section{Serverless}
 %===================================================================================================%
 
+\textbf{Properties that are rather positive:}
+\begin{enumerate}
+    \item reduced operational cost
+    \item reduced development cost
+    \item much higher feature velocity
+    \item easy to use toolchain
+\end{enumerate}
+
+\textbf{Properties that can have neutral or negative effect:}
+\begin{enumerate}
+    \item lack of documentation
+    \item integration testing much harder
+    \item vendor lock-in (system gets dependend on PaaS services)
+    \item Monitoring/Debugging
+\end{enumerate}
 
 %===================================================================================================%
 \section{Summary}

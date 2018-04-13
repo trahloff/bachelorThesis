@@ -1,52 +1,44 @@
-\chapter{Suitability Assessment}\label{chp:suitabilityAssessment}
+\chapter{Prototyping}\label{chp:prototyping}
 
 
 %===================================================================================================%
 \section{Introduction}
 %===================================================================================================%
 
+After evaluating different requirements and therefore task/environment characteristics in chapter \ref{chp:suitabilityAssessment} and chapter \ref{chp:viabilityAssessment}, test cases and prototypes to 
 
 %===================================================================================================%
 \section{Containerized Application}
-%===================================================================================================%
+%=======================================================
 
-\textbf{Properties that are rather positive:}
-\begin{enumerate}
-    \item can execute long-running procedures
-    \item no coldstart problematic since containers are not ephemeral
-\end{enumerate}
+\begin{figure}[ht]
+    \includegraphics[width=0.6\linewidth]{images/streaming/containerArch.png}\centering
+    \caption
+    [IBM IoTP Managed Container Architecture]
+    {IBM IoTP Managed Container Architecture}
+    \label{fig:iotpManagedContainer}
+\end{figure}
 
-\textbf{Properties that can have neutral or negative effect:}
-\begin{enumerate}
-    \item scalability (granularity: container instances on cluster)
-    \item "staircase" scalability (non-linear)
-    \item not immutable -> operational drift
-\end{enumerate}
 
 %===================================================================================================%
 \section{Serverless}
-%===================================================================================================%
+%=======================================================
 
-\textbf{Properties that are rather positive:}
-\begin{enumerate}
-    \item scalability (granularity: function)
-    \item microbilling based on computation
-    \item "limitless" auto-scaling. "you don't think about scaling"
-    \item loosely coupled
-    \item reduced time to market
-    \item polyglot systems make hiring easier
-    \item easily integraded into stream provider
-    \item inherent event-driven
-\end{enumerate}
+\begin{figure}[ht]
+    \includegraphics[width=\linewidth]{images/streaming/streamingaws.png}\centering
+    \caption
+    [AWS Stream Processing Architecture]
+    {AWS Stream Processing Architecture}
+    \label{fig:awsStreamingArchitecture}
+\end{figure}
 
-\textbf{Properties that can have neutral or negative effect:}
-\begin{enumerate}
-    \item stateless 
-    \item limited execution time
-    \item startup latency ("coldstart")
-    \item execution duration (long running jobs)
-\end{enumerate}
+Chapter: \ref{chp:operationalization}
+
+
+
 
 %===================================================================================================%
 \section{Summary}
 %===================================================================================================%
+
+well, wex got two prototypes.

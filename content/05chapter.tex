@@ -20,7 +20,7 @@ In the following section, concepts and indices for measuring suitability and via
 \section{Suitability}
 %***************%
 
-The author defines \textit{suitability} as the measure of how well the prototype fits the environments demands and tasks characteristics. Quantifiably measurable aspects will be compared directly while disclosing the desirable value. Qualitatively measurable aspects will be discussed and deductively compared in order to study the prototypes' differences. 
+The author defines \textit{suitability} as the measure of how well the prototype fits the environments demands and tasks characteristics. Quantitatively measurable aspects will be compared directly while disclosing the desirable value. Qualitatively measurable aspects will be discussed and deductively compared in order to study the prototypes' differences. 
 
 \begin{figure}[ht]
     \includegraphics[width=0.7\linewidth]{images/methodology/ttf.jpg}\centering
@@ -47,15 +47,15 @@ The identified requirements are therefore as follows:
 
 \begin{enumerate}
     \item \textbf{Automated/Limitless Scaling}\\
-        (Qualitatively measured)
+        (Qualitatively measured) How does the system behave under increasing load and what are the provisioning strategies?
     \item \textbf{Event-Driven Design}\\
-        (Qualitatively measured) 
+        (Qualitatively measured) Is the system inherently evend-driven?
     \item \textbf{Low Latency}\\
-        (Quantifiably measured) Message Received - Message Processed
+        (Quantitatively measured) How high is the latency between "Message Received" and "Message Processed"?
     \item \textbf{Failure Resilience}\\
-        (Qualitatively measured) Automatic Failover Strategies, Outage Mitigation, Self-Healing Capabilities
+        (Qualitatively measured) What happens when a failure occurs? Are safeguards like automatic failover strategies, outage mitigation or self-healing capabilities in place?
     \item \textbf{Message Throughput}\\
-        (Quantifiably measured) 
+        (Quantitatively measured) How high is the achievable message throughput?
 \end{enumerate}
 
 
@@ -64,7 +64,7 @@ The identified requirements are therefore as follows:
 \section{Viability}
 %***************%
 
-\textit{Viability} measures the extent of value-added by the technology in comparison to the cost of operation, development, implementation and so forth. Quantifiably measurable aspects will be compared directly while disclosing the desirable value. Qualitatively measurable aspects will be discussed and deductively compared in order to study the prototypes' differences. 
+\textit{Viability} measures the extent of value-added by the technology in comparison to the cost of operation, development, implementation and so forth. Quantitatively measurable aspects will be compared directly while disclosing the desirable value. Qualitatively measurable aspects will be discussed and deductively compared in order to study the prototypes' differences. 
 
 viability  measures the extent to which the environment or organization is ready fo r the application
 
@@ -80,7 +80,12 @@ viability  measures the extent to which the environment or organization is ready
 
 \subsection{Identification of Requirements / Task Characteristics}
 
-As discussed in chapter \ref{chp:background},
+As discussed in chapter \ref{chp:background}, \textit{viability} is an important factor when choosing a technology for a system design. Not only does the academic and technical suitability influences the architectures success, the ease of working with the technology is a pivotal aspect that can decide whether the chosen technology fits for task or not.\\
+Under the term \textit{Ease of Development} several facets of software engineering requirements can be aggregated. In order to enable the developers to successfully implement the architects vision, a comprehensive and easy to understand documentation for the technology has to be available. Otherwise, the work is often error-prone and an excessive amount of time is needed to understand how to operate the technology. Similarly, a lack of available and extensive tooling can cause major delays in the implementation phase. It is furthermore important to be able to conduct automated testing (e.g., unit, integration, etc.) in order to ensure constantly high software quality throughout the products life-cycle.\\
+Likewise, \textit{Ease of Operation} contributes to an overall pleasant and efficient software engineering process. Deployment of the product and the subsequent monitoring has to be easily accessible, cheap and comprehensive. In addition, versioning of the service has to be possible in order to employ DevOps methodologies and enable the operations team to control and rollback the service. Lastly, the performance the service has to be optimizable to ensure an efficient operation of the architecture.\\
+Related to \textit{Ease of Development and Deployment}, \textit{Feature Velocity} plays an important role in the decision for a technology from a business perspective since a higher feature velocity directly translates to a decrease on time-to-market which equals a higher market-share and shorter development life-cycles.\\
+Controversly discussed, the \textit{Vendor Lock-In} influences the design and operation of any architecture. A high lock-in results in high costs to migrate from the chosen service or technology provider to another option. This can cause high opportunity costs and makes the operation from the developer's perspective more inflexible. \\
+Finally, low \textit{Costs} are an important factor when designing a system for obvious reasons. 
 
 \subsection{Specification of Requirements}
 
@@ -90,11 +95,11 @@ As discussed in chapter \ref{chp:background},
     \item \textbf{Ease of Operation}\\
         (Qualitatively measured) Including: Monitoring, Deployment, Versioning, Performance Optimization, ...
     \item \textbf{Feature Velocity}\\
-        (Qualitatively measured) 
+        (Qualitatively measured) How high is the theoretical feature velocity?
     \item \textbf{Low Vendor Lock-In}\\
-        (Qualitatively measured) 
+        (Qualitatively measured) What are the implicit costs to migrate \textit{away} from the serverless platform to another?
     \item \textbf{Cost}\\
-        (Quantifiably measured) Including: Overall Cost of Operation/Ownership, Cost-Control, Ease of Billing/Payment, Total Costs of Maintenance, ...
+        (Quantitatively measured) How high are the costs? Including: Overall Cost of Operation/Ownership, Cost-Control, Ease of Billing/Payment, Total Costs of Maintenance, ...
 \end{enumerate}
 
 
@@ -102,7 +107,7 @@ As discussed in chapter \ref{chp:background},
 
 In order to select a set of important system's properties for the prototype evaluation, a quantitative survey was conducted employing a Likert scale. Ten Likert items were derived from the suitability and viability requirement identification in the previous steps. The Likert items are as follows:
 
-\begin{enumerate}[nolistsep]
+\begin{enumerate}[nolistsep]\label{lst:surveyItems}
     \item \textbf{Ease of Development}\\
         Including: Quality/Comprehensiveness of Documentation, Available Tooling, Ease of Testing (Unit, Integration, User Acceptance, etc.), Debugging, ...
     \item \textbf{Ease of Operation}\\
@@ -130,9 +135,39 @@ Since this survey does not address personal, moral or ethical topics, the biases
 \subsection{Results}
 %***************%
 
+The survey was hosted on \url{typeform.com}, utilizing the service's \textit{free} plan that limits to ten question items. The system characteristics described on page \pageref{lst:surveyItems} were used to derive Likert items. 
+Overall,
+25 responses were collected from
+37 unique visitors, which corresponds to a
+67.6\% completion rate. The average time to complete was 
+01:49 (one minute, fourty-six seconds).
+100\% of the respondents answered every question.
 
-
+\begin{minipage}{\textwidth}
+    The results are as follows:
+    
+    \begin{enumerate}[nolistsep]\label{lst:surveyResults}
+        \item \textbf{Automated/Limitless Scaling} Average: 4.6
+        \item \textbf{Event-Driven Design} Average: 4.6
+        \item \textbf{Low Latency} Average: 4
+        \item \textbf{Failure Resilience} Average: 3.2
+        \item \textbf{Message Throughput} Average: 4.6
+        \item \textbf{Ease of Development} Average: 5.6
+        \item \textbf{Ease of Operation} Average: 4.3
+        \item \textbf{Feature Velocity} Average: 4
+        \item \textbf{Low Vendor Lock-In} Average: 5.1
+        \item \textbf{Cost} Average: 5.1
+    \end{enumerate}
+\end{minipage}
 
 %***************%
 \section{Summary}
 %***************%
+
+Using the methodology defined on page \pageref{sec:approach}, a set of five system characteristics for each the \textit{suitability} and \textit{viability} dimension where identified and specified using the insights gathered through systematic literature review in chapter \ref{chp:background} starting at page \pageref{chp:background}. To validate and select two of these characteristics, a quantitative survey using the Likert scale as a methodological approach was conducted. To avoid any distortion due to non-informed answers, the target group consisted of subject matter experts, experienced software architects and researchers that published on this topic. Particular mentioned should be made of Paul Castro, Vatche Ishakian, Vinod Muthusamy and Aleksander Slominski, whose work has been discussed in chapter \ref{chp:motivation} (page \pageref{castro}). 
+
+Using the two highest voted system characteristic from both the \textit{suitability} and \textit{viability} domain, these two properties will be evaluated:
+\begin{enumerate}[nolistsep]
+    \item \textbf{Automated/Limitless Scaling}
+    \item \textbf{Cost}
+\end{enumerate}

@@ -15,3 +15,79 @@ outcome of the study. recommendation?
 %=======================================================
 
 which parameters have not been discussed? for example: Organization-Technology-Fit, Migration from logacy Architecture, Technology-Acceptance, Legal considerations, ...
+
+
+\subsection{serverless}
+
+
+\textbf{Properties that are rather positive:}
+\begin{enumerate}
+    \item scalability (granularity: function)
+    \item microbilling based on computation
+    \item "limitless" auto-scaling. "you don't think about scaling"
+    \item loosely coupled
+    \item reduced time to market
+    \item polyglot systems make hiring easier
+    \item easily integraded into stream provider
+    \item inherent event-driven
+\end{enumerate}
+
+\textbf{Properties that can have neutral or negative effect:}
+\begin{enumerate}
+    \item stateless 
+    \item limited execution time
+    \item startup latency ("coldstart")
+    \item execution duration (long running jobs)
+\end{enumerate}
+
+
+\textbf{Properties that are rather positive:}
+\begin{enumerate}
+    \item reduced operational cost
+    \item reduced development cost
+    \item much higher feature velocity
+    \item easy to use toolchain
+\end{enumerate}
+
+\textbf{Properties that can have neutral or negative effect:}
+\begin{enumerate}
+    \item lack of documentation
+    \item integration testing much harder
+    \item vendor lock-in (system gets dependend on PaaS services)
+    \item Monitoring/Debugging
+\end{enumerate}
+
+
+
+\subsection{non-serverless}
+
+
+\textbf{Properties that are rather positive:}
+\begin{enumerate}
+    \item can execute long-running procedures
+    \item no coldstart problematic since containers are not ephemeral
+\end{enumerate}
+
+\textbf{Properties that can have neutral or negative effect:}
+\begin{enumerate}
+    \item scalability (granularity: container instances on cluster)
+    \item "staircase" scalability (non-linear)
+    \item not immutable -> operational drift
+\end{enumerate}
+
+
+
+\textbf{Properties that are rather positive:}
+\begin{enumerate}
+    \item easier to migrate to
+\end{enumerate}
+
+\textbf{Properties that can have neutral or negative effect:}
+\begin{enumerate}
+    \item "staircase" scalability (non-linear)
+    \item not immutable -> operational drift
+    \item provisioning
+    \item managemnet of container image
+    \item optimizations have non-linear effects
+    \item self-healing is always a problem
+\end{enumerate}

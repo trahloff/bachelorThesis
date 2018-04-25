@@ -5,110 +5,55 @@
 \section{Introduction}
 %===================================================================================================%
 
-After evaluating different requirements and therefore task/environment characteristics in chapter \ref{chp:suitabilityAssessment} and chapter \ref{chp:viabilityAssessment}, test cases and prototypes to 
+After evaluating different requirements and therefore task and environment characteristics in chapter~\vref{chp:operationalization}, test cases and prototypes to run against the test cases have to be designed. Similar to the environments outlined in the previous chapter, both prototypes for the no-serverless and serverless approach differ in their basic cloud-platform setup, but are as similar as possible on the logic level to avoid any distortion of the results.
+
+To ensure comparability between both prototypes, basic architecture will remain the same for each system. AWS Kinesis Data-Streams\footnote{\url{https://aws.amazon.com/kinesis/data-streams/}} will be used as a Event-Stream provider and only the data-processing approach will differ between those two prototypes. 
+
+In the following, these prototypes will be discussed and their architecture will be outlined in order to provide the reader a comprehensive insight into the systematic research conducted by the author and thevrefore ensure the explicit and reproducible nature of this paper. 
+
+
 
 %===================================================================================================%
-\section{Containerized Application}
+\section{Event-Stream}\label{chp:protoEvent-Stream}
 %===================================================================================================%
 
+To generate the incoming messages, the AWS Kinesis Data Generator Project\footnote{\url{https://github.com/awslabs/amazon-kinesis-data-generator}} is used. The AWS CloudFormation service is used to provision a simple data-generator instance. The template used to to so can be seen in the appendix A on page~\pageref{app:cloudformation}. It is a web client that uses user-supplied parameters to create messages on the data-stream. 
 
-For the non-serverless approach, containers running the prototype are deployed on a Kubernetes Cluster on IBM Cloud. To adequately compare the prices of both solutions, a cluster type has to be chosen that is theoretically capable of the same compute power a serverless approach can deliver. The following system model is based on approximations and assumptions since non-serverless and serverless compute power is not possible to directly compare.
+%===================================================================================================%
+\section{Non-Serverless}\label{chp:protoNSL}
+%===================================================================================================%
 
-To illustrate, the smallest serverless instance type at AWS consists of function invocations with 128mb of RAM\footnote{\url{https://aws.amazon.com/lambda/pricing/}}. For the aforementioned scenario of $10,000$ messages per second, that would mean that at least 1280GB RAM is available at any given second (\(10,000 * 0.128\)) because this would be the allocated RAM when receiving $10.000$ messages at once. If the functions to process the messages run for more than one second the allocated RAM would drastically increase. For instance, if each function runs for three seconds, the allocated memory would increase threefold since every second 1280GB of RAM will be added to the overall allocation pool.\\
-Under the hypothesis, that the simple unit conversion processing task outlined in chapter \ref{ssec:scaling} (page \pageref{ssec:scaling}) will not use 128MB memory per conversion, it is not necessary for the environment design to model a non-serverless environment that has the full 1280GB memory available but should be close to it. 
-
-IBM Cloud provides users with three classes of cluster configurations:\footnote{\url{https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes}}
-
-\begin{minipage}{\textwidth}
-    \begin{enumerate}[nolistsep]
-        \item \textbf{Lite}\\
-            Free of cost. Consists of one worker node.
-        \item \textbf{Shared}\\
-            Worker nodes that are shared with other IBM customers.
-        \item \textbf{Dedicated}\\
-            Dedicated worker nodes that ensure complete isolation of the physical ressources.
-    \end{enumerate}
-\end{minipage}
-
-The available Kubernetes cluster options are as follows:\footnote{\url{https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes}}
-
-\begin{minipage}{\textwidth}
-        \begin{tabular}{ | c | c | } 
-            \hline
-             \textbf{Plan} & 
-             \textbf{Features}\\
-             \hline \hline
-             Lite & 
-             2 CPUs, 4 GB RAM, 1 Worker Node\\
-             \hline 
-             2x4 - Shared & 
-             2 CPUs, 4 GB RAM, 100GB HDD\\
-             \hline 
-             4x16 - Shared & 
-             4 CPUs, 16 GB RAM, 100GB HDD\\
-             \hline 
-             16x64 - Shared & 
-             16 CPUs, 64 GB RAM, 100GB HDD\\
-             \hline  
-             32x128 - Shared & 
-             32 CPUs, 128 GB RAM, 100GB HDD\\
-             \hline  
-             56x242 - Shared & 
-             56 CPUs, 242 GB RAM, 100GB HDD\\
-             \hline 
-             2x4 - Dedicated & 
-             2 CPUs, 4 GB RAM, 100GB HDD\\
-             \hline 
-             4x16 - Dedicated & 
-             4 CPUs, 16 GB RAM, 100GB HDD\\
-             \hline 
-             16x64 - Dedicated & 
-             16 CPUs, 64 GB RAM, 100GB HDD\\
-             \hline  
-             32x128 - Dedicated & 
-             32 CPUs, 128 GB RAM, 100GB HDD\\
-             \hline  
-             56x242 - Dedicated & 
-             56 CPUs, 242 GB RAM, 100GB HDD\\
-             \hline 
-        \end{tabular}
-        \centering
-\end{minipage}
-
+The non-serverless prototype utilizes long-running Docker container (which were discussed in chapter~\vref{chp:container}). The the basic system's architecture is outlined in figure~\vref{fig:nslArchitecture}. All of the business logic is contained and run inside docker containers that are deployed in the cloud. They subscribe to the message stream, receive messages and process them accordingly. 
 
 \begin{figure}[ht]
-    \includegraphics[width=0.6\linewidth]{images/streaming/containerArch.png}\centering
+    \includegraphics[width=\linewidth]{images/streaming/containerArch.png}\centering
     \caption
-    [IBM IoTP Managed Container Architecture]
-    {IBM IoTP Managed Container Architecture}
-    \label{fig:iotpManagedContainer}
+    {Non-Serverless Stream Processing Architecture}
+    \label{fig:nslArchitecture}
 \end{figure}
 
-\begin{figure}[ht]
-    \begin{lstlisting}[language=js,firstnumber=1]
-    'use strict'
-        
-    const celsiusToFahrenheit = (eventType, format, payloadRaw) => {
-      const payload = JSON.parse(payloadRaw)
-      const fahrenheitTemp = (payload.temp / (9/5) + 32)
-      console.log(fahrenheitTemp)
-    }
-        
-    app.connect()
-        
-    app.on('connect', () => {
-        app.subscribeToDeviceEvents()
-    })
-        
-    app.on('deviceEvent', celsiusToFahrenheit)
-    \end{lstlisting}\centering
-    \caption{Code: Non-Serverless Processor}
-    \label{code:nslProcessor2}
-\end{figure}
+To subscribe to incoming messages, the official AWS NodeJS client library and the corresponding sample code is used.\footnote{\url{https://github.com/awslabs/amazon-kinesis-client-nodejs}} To avoid any distortion of the measurements by compute operations that are not in scope of this study, the incoming messages will only be converted from Celsius to Fahrenheit and logged to console without being written to a database.\\
+For the non-serverless approach, containers running the prototype are deployed on AWS to adequately compare the prices of both solutions, a instance type to run the containers has to be chosen that is theoretically capable of the same compute power a serverless approach can deliver. The following system model is based on approximations and assumptions since non-serverless and serverless compute power is not possible to directly compare.
+
+
+In chapter~\vref{chp:operationalization}, a test case was designed where 10,000 messages per second are being produced. To calculate the theoretically required non-serverless producers the following formulas\autocite{AmazonFAQs} can be used:
+
+$\textbf{incoming-write-bandwidth-in-KB} = \\
+\text{average-data-size-in-KB} * \text{number-of-records-per-seconds}$
+
+$\textbf{outgoing-read-bandwidth-in-KB} = \\
+\text{incoming-write-bandwidth-in-KB} * \text{number-of-consumers}$
+
+$\textbf{\# Consumers} = \\
+max(\text{incoming-write-bandwidth-in-KB}/1000, \text{outgoing-read-bandwidth-in-KB}/2000)$
+
+Meaning, that either the incoming write bandwidth in Kilobyte divided by 1000 or, the outgoing read bandwidth in Kilobyte divided by 2000 determines the amount of consumers needed depending which of both measurements is higher. The \textit{number-of-consumers} is in this scenario equal to $1$, since the consumer poses as one logical consumer that is scaled horizontally. The \textit{average-data-size-in-KB} is rounded to 1 Kilobyte (see chapter~\vref{fig:messagePayload}), which results in 10 deployed consumer instances. 
+
+Using the official client library\footnote{\url{https://github.com/awslabs/amazon-kinesis-client-nodejs}}, 10 consumer instances have to be deployed to sufficiently process the incoming stream. Utilized are the AWS EC2 C5 instances, which are recommended for this type of workload\footnote{\url{https://aws.amazon.com/ec2/instance-types/}}. For evaluation of processing power, the different types of C5 instances would have to be considered, since they are equipped with different CPU and RAM kits but since this study focuses on general scalability (which is constraint by the architectural pattern and not be the raw compute power for the non-serverless approach) and costs, the cheapest option "C5.large" is used. 
 
 
 %===================================================================================================%
-\section{Serverless}
+\section{Serverless}\label{chp:protoSL}
 %=======================================================
 
 \begin{figure}[ht]
@@ -119,43 +64,47 @@ The available Kubernetes cluster options are as follows:\footnote{\url{https://c
     \label{fig:awsStreamingArchitecture}
 \end{figure}
 
+The serverless compute prototype will be implemented using AWS Lambda. Due to the nature of the service, only the processing logic has to be supplied as code. Provisioning of instances and invocation of functions is entirely done by the platform, thus reducing the amount of work required for a deployment drastically. To execute the logic, an NodeJS 8.10 environment is used and the following code (figure~\vref{code:slProcessor} is deployed:
+
 \begin{figure}[ht]
     \begin{lstlisting}[language=js,firstnumber=1]
     'use strict'
+    const AWS = require('aws-sdk')
 
-    const celsiusToFahrenheit = (eventType, format, payloadRaw) => {
-      const payload = JSON.parse(payloadRaw)
-      const fahrenheitTemp = (payload.temp / (9/5) + 32)
-      return fahrenheitTemp
+    /* Unit Conversion */
+    const celsiusToFahrenheit = data => {
+      const parsedJSON = JSON.parse(
+        Buffer.from(data, 'base64').toString('ascii')
+      )
+      const celsius = parsedJSON.temp
+      return celsius * 9 / 5 + 32
     }
-        
+    
     exports.handler = (event, context, callback) => {
-        /* Process the list of records and transform them */
-        const output = event.records.map((record) => ({
-            /* This transformation is the "identity" transformation, the data is left intact */
-            recordId: celsiusToFahrenheit(record.recordId),
-            result: 'Ok',
-            data: record.data,
-        }))
-        console.log(`Processing completed.  Successful records \${output.length}.`)
-        callback(null, { records: output })
-    };
+      /* Process the list of records and transform them */
+      const output = event.Records.map(record => ({
+        /* This transformation is the "identity" transformation, the data is left intact */
+        recordId: record.eventID,
+        result: 'Ok',
+        data: celsiusToFahrenheit(record.kinesis.data)
+      }))
+    
+      /* Log Results */
+      output.map(e => console.log(e.data))
+      callback(null, { records: output })
+    }
     \end{lstlisting}\centering
     \caption{Code: Serverless Processor}
     \label{code:slProcessor}
 \end{figure}
 
-Chapter: \ref{chp:operationalization}
-
-
-
-
-
-
+Performance, scaling, invocation and duration metrics are gathered with the AWS Service "CloudWatch", which records the measurements and is not open source. It is assumed that the metrics gathered are correct.
 
 
 %===================================================================================================%
 \section{Summary}
 %===================================================================================================%
 
-well, wex got two prototypes.
+Using AWS Kinesis as an Event-Stream and AWS Kinesis Data Generator, data ingress (i.e., messages) are generated that will be processed by long-running containers for the non-serverless prototype and AWS Lambda functions that run NodeJS8.10 for the serverless approach.\\
+Due to architectural constraints, the number of non-serverless data-consumers is predefined and they have to be manually deployed. For the serverless approach on the other hand, only the processing logic has to be supplied as code. Provisioning of instances and invocation of functions is entirely done by the platform. \\
+Recording of measurements is done by the AWS Service "Cloudwatch".

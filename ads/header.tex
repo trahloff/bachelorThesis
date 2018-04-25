@@ -72,6 +72,11 @@
 \usepackage[hang, multiple, stable]{footmisc} % Fussnoten
 \usepackage[printonlyused]{acronym} % falls gewünscht kann die Option footnote eingefügt werden, dann wird die Erklärung nicht inline sondern in einer Fußnote dargestellt
 \usepackage{listings}
+\usepackage{mathtools}
+
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
 
 
@@ -158,6 +163,8 @@
 \usepackage{xpatch}
 \xapptobibmacro{cite}{\setunit{\nametitledelim}\printfield{year} \printurldate \printfield{pages}}{}{}
 \newcommand{\cfcite}[1]{\autocite[cf.][]{#1}}
+\newcommand{\fullref}[1]{\ref{#1} (page \pageref{#1}}
+\usepackage{varioref}
 
 \ladeliteratur{}
 

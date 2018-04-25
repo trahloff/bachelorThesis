@@ -5,46 +5,69 @@
 \section{Introduction}
 %===================================================================================================%
 
+In chapter~\vref{chp:operationalization} the two system characteristics to evaluate \textit{Automated/Limitless Scaling} and \textit{Cost} were identified, specified, selected and validated. This chapter addresses the evaluation of the \textit{Viability} domain and thevrefore focuses on the \textit{Cost} of the prototypes that are evaluated. Based on the system's requirements and thevrefore task and environment characteristics in chapter~\vref{chp:operationalization}, test cases and prototypes designed in chapter~\vref{chp:prototyping} and behavior discussed in chapter~\vref{chp:suitabilityAssessment}, an underlying cost-calculation model that is based on real-world observations can be designed and costs for a greater time span can be interpolated.
+
+Regarding the serverless prototype, only a minimal amount of cost approximation has to be done since it inherently scales nearly-linear with increasing load (see chapter~\vref{chp:operationalization}. As discussed in the same chapter, the non-serverless (i.e., managed container) approach scales semi step-fixed with increasing load. Due to budget constraints, the scope of the study and the lack of a high-class key account at the cloud provider, it will be assumed that the observed provisioning and scaling pattern in chapter~\vref{chp:operationalization} does not change with much higher load. At the present day there is no academic reason to believe otherwise besides the requirement for special legal agreements and SLAs ("Service-Level-Agreement") between user and service provider. 
 
 %===================================================================================================%
-\section{Containerized Application}
+\section{Non-Serverless}\label{chp:viaNSL}
 %===================================================================================================%
 
-\textbf{Properties that are rather positive:}
-\begin{enumerate}
-    \item easier to migrate to
-\end{enumerate}
+As discussed in chapter~\vref{chp:protoNSL}, 10 AWS EC2 C5.large container instances are employed to process the incoming messages. The instances are billed by the hour with a price of $\$0.097$ per hour.\footnote{\url{https://aws.amazon.com/ec2/pricing/on-demand/}} Since a continuous load of 10,000 messages per second is assumed as the task (see chapter~\vref{chp:operationalization}), a utilization of 100\% can be presumed, resulting in the following cost consideration:
 
-\textbf{Properties that can have neutral or negative effect:}
-\begin{enumerate}
-    \item "staircase" scalability (non-linear)
-    \item not immutable -> operational drift
-    \item provisioning
-    \item managemnet of container image
-    \item optimizations have non-linear effects
-    \item self-healing is always a problem
-\end{enumerate}
+$\textbf{Cost per Month for 1 Instance} = \$0.097 * 24 * 30 = \textbf{\$69.84}$
+
+$\textbf{Cost per Month for 10 Instances} = \$69.84 * 10 = \textbf{\$698.40}$
+
+This costs are fixed and do not adapt to incoming load. 
 
 %===================================================================================================%
-\section{Serverless}
+\section{Serverless}\label{chp:viaSL}
 %===================================================================================================%
 
-\textbf{Properties that are rather positive:}
-\begin{enumerate}
-    \item reduced operational cost
-    \item reduced development cost
-    \item much higher feature velocity
-    \item easy to use toolchain
-\end{enumerate}
+In the first place, it is important to understand how costs for serverless computing with AWS Lambda are calculated and of which sub-costs it consists. AWS Lambda costs divided into two subcategories: \textbf{requests} and \textbf{duration}. 
 
-\textbf{Properties that can have neutral or negative effect:}
-\begin{enumerate}
-    \item lack of documentation
-    \item integration testing much harder
-    \item vendor lock-in (system gets dependend on PaaS services)
-    \item Monitoring/Debugging
-\end{enumerate}
+\blockquote{
+    "Lambda counts a \textbf{request} each time it starts executing in response to an event notification or invoke call, including test invokes from the console. You are charged for the total number of requests across all your functions.  
+    
+    \textbf{Duration} is calculated from the time your code begins executing until it returns or otherwise terminates, rounded up to the nearest 100ms. The price depends on the amount of memory you allocate to  your function."\autocite{AWSPricing}
+}
+
+Meaning that every time a Lambda function is invoked, a new \textit{request} is billed, and the instanced function is billed for every broached 100ms. The pricing for both subcategories is as follows: 
+
+\begin{itemize}[label={}]
+    \item \textbf{Requests:}\\
+        The first 1,000,000 requests per month are free of charge.\\
+        \$0.20 per 1,000,000 request thereafter.\\
+        \$0.0000002 per request.\\
+    \item \textbf{Duration:}\\
+        400,000 GB-Seconds per month, up to 3.2M seconds of compute time, are totally free of charge.\\
+        \$0.00001667 is charged for every GB-Second thereafter.\\
+        $\longrightarrow$ with 128MB memory per Lambda invocation, costs of \$0.000000208 are generated for each 100ms of compute time. 
+\end{itemize}
+
+As identified in chapter~\vref{chp:operationalization}, the test case is defined as 10,000 messages per second and an average computation duration of 90ms per 500 messages, which results in the following cost considerations for one month (30 days): 
+
+$\textbf{Requests needed for 10k Messages} = 10000 / 500 = \textbf{20}$
+
+$\textbf{Requests per Month} = 20 * 60 * 60 * 24 * 30 = \textbf{51,840,000}$
+
+$\textbf{Request Costs} = \ceil*{51,840,000 * \$0.0000002} = \textbf{\$10.17}$
+
+$\textbf{Duration Costs} = \ceil*{(100ms / 100ms) * \$0.000000208 * 25,920,000,000} = \textbf{\$10.57}$
+
+$\textbf{Total Costs} = \$5,183.80 + \$10,782.31 = \textbf{\$20.75}$
+
+%===================================================================================================%
+\section{Comparison}\label{chp:viaComp}
+%===================================================================================================%
+
+With a total cost of $\$20.75$ per month, the serverless approach is far more affordable compared to the $\$698.40$ when using the non-serverless alternative. It is approximately $3,300\%$ cheaper for the best-case scenario of a constant and continuous load. When confronted with idle time, the cost saving would only increase.
 
 %===================================================================================================%
 \section{Summary}
 %===================================================================================================%
+
+The non-serverless costs are fixed and do not adapt to incoming load. 10 AWS EC2 C5.large container instances are employed to process the incoming messages.\\
+Serverless functions are billed by \textit{requests} (number of invocations) and \textit{duration} (time a  function is running rounded to the next 100ms).\\
+With a total cost of $\$20.75$ per month, the serverless approach is far more affordable compared to the $\$698.40$ when using the non-serverless alternative. It is approximately $3,300\%$ cheaper for the best-case scenario of a constant and continuous load. When confronted with idle time, the cost saving would only increase.

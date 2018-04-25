@@ -5,47 +5,42 @@
 \section{Introduction}
 %===================================================================================================%
 
+In chapter~\vref{chp:operationalization} the two system characteristics to evaluate \textit{Automated/Limitless Scaling} and \textit{Cost} were identified, specified, selected and validated. This chapter addresses the evaluation of the \textit{Suitability} domain and thevrefore focuses on the \textit{Automated/Limitless Scaling} property of the prototypes that are evaluated. Based on the system's requirements and thevrefore task and environment characteristics in chapter~\vref{chp:operationalization}, test cases and prototypes to run against the test cases have been designed in chapter~\vref{chp:prototyping}.
+
+In the following, these suitability will be discussed.
 
 %===================================================================================================%
-\section{Containerized Application}
+\section{Non-Serverless}\label{chp:suitNSL}
 %===================================================================================================%
 
-\textbf{Properties that are rather positive:}
-\begin{enumerate}
-    \item can execute long-running procedures
-    \item no coldstart problematic since containers are not ephemeral
-\end{enumerate}
+The scalability of the containerized approach is restricted due to the constraint that instances have to be pre-provisioned and cannot be allocated dynamically. As outlined in chapter~\vref{chp:operationalization} and chapter~\vref{chp:prototyping}, a total requirement of 10 instances has been calculated. 
 
-\textbf{Properties that can have neutral or negative effect:}
-\begin{enumerate}
-    \item scalability (granularity: container instances on cluster)
-    \item "staircase" scalability (non-linear)
-    \item not immutable -> operational drift
-\end{enumerate}
+\begin{figure}[ht]
+    \begin{tikzpicture}
+        \begin{axis}[
+                ,xlabel         = $\# Requests$
+                ,ylabel         = {$Provisioned \, Compute \, Power$}
+                ,xticklabels    = {,,}
+                ,axis x line    = bottom
+                ,axis y line    = left
+                ,domain         = 0:5
+                ]
+            \addplot[no marks, color=blue]{10};
+        \end{axis}
+    \end{tikzpicture}\centering
+    \caption {Provisioned Container Instances}
+    \label{graph:provisionedContainerInstances}
+\end{figure}
 
 %===================================================================================================%
-\section{Serverless}
+\section{Serverless}\label{chp:suitSL}
 %===================================================================================================%
 
-\textbf{Properties that are rather positive:}
-\begin{enumerate}
-    \item scalability (granularity: function)
-    \item microbilling based on computation
-    \item "limitless" auto-scaling. "you don't think about scaling"
-    \item loosely coupled
-    \item reduced time to market
-    \item polyglot systems make hiring easier
-    \item easily integraded into stream provider
-    \item inherent event-driven
-\end{enumerate}
 
-\textbf{Properties that can have neutral or negative effect:}
-\begin{enumerate}
-    \item stateless 
-    \item limited execution time
-    \item startup latency ("coldstart")
-    \item execution duration (long running jobs)
-\end{enumerate}
+%===================================================================================================%
+\section{Comparison}\label{chp:suitComp}
+%===================================================================================================%
+
 
 %===================================================================================================%
 \section{Summary}

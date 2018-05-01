@@ -12,7 +12,7 @@ After identifying, specifying, selecting and validating the two system propertie
 %===================================================================================================%
 
 In order to replicate a real-life use case, various confidential client projects that IBM has been implementing were looked at to derive parameters and to obtain reliable numbers. These numbers will be supported and validated by public available academic sources to maintain the the explicit and reproducible nature of this study.\\
-Since the scope of this study is limited to cloud architectures, the environment for the test case will be the to the prototype corresponding cloud environment. For the non-serverless approach, \textit{IBM Cloud}\footnote{\url{https://www.ibm.com/cloud/}} will be used. Likewise, for the serverless approach, \textit{Amazon Web Servives}\footnote{\url{https://aws.amazon.com/}} will be employed. 
+Since the scope of this study is limited to cloud architectures, the environment for the test case will be the to the prototype corresponding cloud environment. For the non-serverless approach, \textit{IBM Cloud}\footnote{\url{https://www.ibm.com/cloud/}} will be used. Likewise, for the serverless approach, \textit{Amazon Web Services}\footnote{\url{https://aws.amazon.com/}} will be employed. 
 
 \begin{figure}[ht]
     \includegraphics[width=\linewidth]{images/drawio/highlevelTestArch.png}\centering
@@ -47,7 +47,7 @@ After five test iteration the evaluation for the task "Automated/Limitless Scali
     \label{graph:scalingTask}
 \end{figure}
 
-The processing task for the data processors will be very simple. Each message will carry a small JSON (JavaScript-Object-Notation) payload to be processed (figure~\vref{fig:messagePayload}). This payload has a size of 61Bytes. Depending on the plaform-specific requirements and recommended practices, the way the payload is sent to the endpoint can differ and is explained in chapter~\vref{chp:prototyping}. 
+The processing task for the data processors will be very simple. Each message will carry a small JSON (JavaScript-Object-Notation) payload to be processed (figure~\vref{fig:messagePayload}). This payload has a size of 61Bytes. Depending on the platform-specific requirements and recommended practices, the way the payload is sent to the endpoint can differ and is explained in chapter~\vref{chp:prototyping}. 
 
 \begin{figure}
     \begin{lstlisting}[language=json,firstnumber=1]
@@ -68,8 +68,8 @@ To assess how well both prototypes handled the task, the \textit{provisioned com
 \subsection{Cost}
 %******************************************%
 
-As for the aspect of scalability, $10,000 Messages\,per\,Second$ will be assumed as the continuous load. To calculate the overall costs for the time-frame of $one\,month$ will be determined. Lower costs are pvreferable.\\
-Thevrefore, both prototypes are compared cost-wise for the processing of $10,000 Messages\,per\,Second$.
+As for the aspect of scalability, $10,000 Messages\,per\,Second$ will be assumed as the continuous load. To calculate the overall costs for the time-frame of $one\,month$ will be determined. Lower costs are preferable.\\
+Therefore, both prototypes are compared cost-wise for the processing of $10,000 Messages\,per\,Second$.
 
 
 
@@ -82,5 +82,5 @@ The environment will consist of a simulated IoT device which represents a sensor
 In order to test the scaling capabilities of each proposed architecture, over the time of ten minutes, the amount of messages sent to the system will increase to a maximum of $10,000$ messages per second. This scenario is outlined in~\vref{graph:scalingTask}. Each test round will last $5$ seconds, meaning that at the first test iteration, $10,000$ messages will be sent over the course of $5$ seconds, resulting in $2,000Messages/Second$ ($\dfrac{10,000}{5}=2,000$).
 To assess how well both prototypes scale, the \textit{provisioned compute units} for incoming messages will be compared. 
 
-As for the aspect of scalability, $10,000 Messages\,per\,Second$ will be assumed as the continuous load. To calculate the overall costs for the time-frame of $one\,month$ will be determined. Lower costs are pvreferable.\\
-Thevrefore, both prototypes are compared cost-wise for the processing of $10,000 Messages\,per\,Second$ over the course of $one\,month$. 
+As for the aspect of scalability, $10,000 Messages\,per\,Second$ will be assumed as the continuous load. To calculate the overall costs for the time-frame of $one\,month$ will be determined. Lower costs are preferable.\\
+Therefore, both prototypes are compared cost-wise for the processing of $10,000 Messages\,per\,Second$ over the course of $one\,month$. 

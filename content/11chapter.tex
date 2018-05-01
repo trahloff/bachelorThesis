@@ -1,93 +1,78 @@
-\chapter{Conclusion/Summary}
+\chapter{Summary}
 
 
 %===================================================================================================%
 \section{Findings}
 %=======================================================
 
-outcome of the study. recommendation?
+The main findings of this study are, that given the environment and task defined in chapter~\vref{chp:environmentTaskModelling}: 
 
-\autocite{whatEvEv2017}
+\begin{enumerate}[nolistsep]
+    \item The serverless prototype provides a much \textbf{much better automated and limitless scalability} than the non-serverless (i.e., containerized) approach. 
+    \item The serverless prototype has approximately $51.36\%$ \textbf{higher costs} compared to the non-serverless (i.e., containerized) approach. 
+\end{enumerate}
+
+As discussed in chapter~\vref{chp:objective}, the purpose of this research is to evaluate the suitability and viability of the serverless architecture pattern by comparing it in a prototypical scenario and to assess the current industry understanding of "serverless" and to understand the requirements that a serverless architectures have to face, identified by experts.\label{txt:objective}
+
+After a systematic literature review in chapter~\vref{chp:background}, different research methods were evaluated in chapter~\vref{chp:researchMethod} in order to design a fitting methodological approach for the research objective. The resulting research approach was as follows:
+
+\begin{enumerate}[nolistsep]
+        \item \textbf{Requirements Engineering}\\
+            Based on Suitability (TTF) \& Viability (FVM)
+            \begin{enumerate}
+                \item[I. ] \textbf{Requirements Identification} (Literature Review)\\
+                    $\longrightarrow$ \textbf{Requirements Specification}(Hypothesis)
+                \item[II. ] \textbf{Requirements Validation/Selection}(Quantitative Survey, Likert Scale)
+            \end{enumerate}
+        \item \textbf{Environment/Task Modelling}
+        \item \textbf{Prototyping}
+        \item \textbf{Suitability Assessment} 
+        \item \textbf{Viability Assessment}
+        \item \textbf{Recommendation $\longrightarrow$ Conclusion}
+\end{enumerate}
+
+As mentioned~\vpageref{txt:objective}, the study's objective is not only to assess suitability and viability, but also to understand the requirements that a serverless architectures have to face, identified by experts. In order to do so, and to identify one property each for the suitability and viability domain, a questionnaire based on Likert scale items was designed in chapter~\vref{chp:operationalization}.\\
+Overall,
+55 responses were collected from
+57 unique visitors, which corresponds to a
+96.49\% completion rate. The average time to complete was 
+01:49 (one minute, fourty-nine seconds).
+100\% of the respondents answered all questions. 
+
+\begin{minipage}{\textwidth}
+    The results are as follows:
+    
+    \begin{enumerate}[nolistsep]\label{lst:surveyResults2}
+        \item \textit{Automated/Limitless Scaling} Average: 5.1
+        \item \textit{Event-Driven Design} Average: 4.6
+        \item \textit{Low Latency} Average: 4
+        \item \textit{Failure Resilience} Average: 3.2
+        \item \textit{Message Throughput} Average: 4.6
+        \item \textit{Ease of Development} Average: 4.3
+        \item \textit{Ease of Operation} Average: 4.3
+        \item \textit{Feature Velocity} Average: 4
+        \item \textit{Low Vendor Lock-In} Average: 4.3
+        \item \textit{Cost} Average: 4.9
+    \end{enumerate}
+\end{minipage}
+
+Meaning that \textit{Automated/Limitless Scaling} and \textit{Cost} were the two properties chosen to evaluate. To do so, an environment, a task and two prototypes were designed in chapter~\vref{chp:environmentTaskModelling} ff. and chapter~\vref{chp:prototyping} ff.. 
+
+After evaluating the suitability (\textit{Automated/Limitless Scaling}) in~\vref{chp:suitabilityAssessment} ff. and the viability (\textit{Cost}) in~\vref{chp:viabilityAssessment} ff., this study concludes that 
+For the task and environment defined, the serverless prototype provides a \textbf{much better automated and limitless scalability} than the non-serverless (i.e., containerized) approach but comes with approximately $51.36\%$ \textbf{higher costs}.\\
+This results in a trade-off an architect deciding whether he should use the serverless approach for a system or not should carefully consider: does the high advantage in scalabiltiy outweight the higher costs (for this scenario)? 
 
 
 %===================================================================================================%
 \section{Future Research}
 %=======================================================
 
-which parameters have not been discussed? for example: Organization-Technology-Fit, Migration from logacy Architecture, Technology-Acceptance, Legal considerations, ...
+Due to the limited scope of this study, many important aspects have not been discussed. As a starting point, the pre-selected system characteristics discussed in chapter~\vref{chp:operationalization} ff. to assess the serverless suitability and viability even further provide future research with a foundation. \\
+Especially interesting are the properties \textit{Message Throughput} and \textit{Low Latency}, since they both scored relatively high in the survey and are both quantifiable, thus making them easier to measure. But also \textit{Ease of Operation}, \textit{Ease of Development} and \textit{Feature Velocity} are attractive and important research topics (cf. chapter~\vref{lst:surveyResults1} ff.). 
+
+Apart from the different system characteristics for the suitability and viability dimensions, further research on the topic of serverless architectures with focus on different dimensions such as organizational fit~\autocite[see ][]{Depietro1990TheEnvironment}\highcomma\autocite[see ][]{Rogers1995DiffusionInnovations} or technology acceptance~\autocite[see ][]{Venkatesh2003UserViewb}\highcomma\autocite[see ][]{Davis1986AResults}\highcomma\autocite[see ][]{Davis1989UserModelsb}\highcomma\autocite[see ][]{Davis1989PerceivedTechnology}.
+
+In addition, economic evaluation of the topic could be conducted, such as evaluation time-to-market, team feature velocity, or the problem of team-staffing for new technologies. Especially examinations of real-world projects with non-simulated data could lead to an enormous knowledge value for the academic community, since, as mentioned earlier in chapter~\vref{chp:bodyOfKnow} ff., the amount of papers published on the topic of serverless computing and their contentual diversity leaves much to be desired. \\
+Moreover, an analysis of the operational, migration and development costs could add an immense value since it would enable projects to create an improved and more accurate cost estimation for serverless projects and architectures. 
 
 
-\subsection{serverless}
-
-
-\textbf{Properties that are rather positive:}
-\begin{enumerate}
-    \item scalability (granularity: function)
-    \item microbilling based on computation
-    \item "limitless" auto-scaling. "you don't think about scaling"
-    \item loosely coupled
-    \item reduced time to market
-    \item polyglot systems make hiring easier
-    \item easily integraded into stream provider
-    \item inherent event-driven
-\end{enumerate}
-
-\textbf{Properties that can have neutral or negative effect:}
-\begin{enumerate}
-    \item stateless 
-    \item limited execution time
-    \item startup latency ("coldstart")
-    \item execution duration (long running jobs)
-\end{enumerate}
-
-
-\textbf{Properties that are rather positive:}
-\begin{enumerate}
-    \item reduced operational cost
-    \item reduced development cost
-    \item much higher feature velocity
-    \item easy to use toolchain
-\end{enumerate}
-
-\textbf{Properties that can have neutral or negative effect:}
-\begin{enumerate}
-    \item lack of documentation
-    \item integration testing much harder
-    \item vendor lock-in (system gets dependend on PaaS services)
-    \item Monitoring/Debugging
-\end{enumerate}
-
-
-
-\subsection{non-serverless}
-
-
-\textbf{Properties that are rather positive:}
-\begin{enumerate}
-    \item can execute long-running procedures
-    \item no coldstart problematic since containers are not ephemeral
-\end{enumerate}
-
-\textbf{Properties that can have neutral or negative effect:}
-\begin{enumerate}
-    \item scalability (granularity: container instances on cluster)
-    \item "staircase" scalability (non-linear)
-    \item not immutable -> operational drift
-\end{enumerate}
-
-
-
-\textbf{Properties that are rather positive:}
-\begin{enumerate}
-    \item easier to migrate to
-\end{enumerate}
-
-\textbf{Properties that can have neutral or negative effect:}
-\begin{enumerate}
-    \item "staircase" scalability (non-linear)
-    \item not immutable -> operational drift
-    \item provisioning
-    \item managemnet of container image
-    \item optimizations have non-linear effects
-    \item self-healing is always a problem
-\end{enumerate}

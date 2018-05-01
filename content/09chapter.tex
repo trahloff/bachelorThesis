@@ -32,16 +32,43 @@ The scalability of the containerized approach is restricted due to the constrain
     \label{graph:provisionedContainerInstances}
 \end{figure}
 
+Therefore, an \textit{Automated/Limitless Scalability} is not achievable with the non-serverless approach outlined in this study. 
+
 %===================================================================================================%
 \section{Serverless}\label{chp:suitSL}
 %===================================================================================================%
+
+The serverless prototype scales completely automatic, event-driven, elastic and managed by the platform provider (AWS). Only the compute power needed to process the incoming messages is provisioned which can be seen in figure~\vref{graph:provisionedServerlessFunctions}. The 10,000 messages per second that are part of the evaluated test scenario were no problem at all. After consulting the AWS CloudWatch metrics, it is clear that the first few function invocations take a slightly increased amount of time to start up compared to later invoked functions. This is called a "cold-start"~\cfcite{Castro2017ServerlessService} and does not have a great impact on the average performance for this task because it only affects the very first function invocations. Overall, the average duration is approximately 60ms, which is consistent with the expected duration. 
+
+\begin{figure}[ht]
+    \begin{tikzpicture}
+        \begin{axis}[
+                ,xlabel         = $\# Requests$
+                ,ylabel         = {$Provisioned \, Compute \, Power$}
+                ,yticklabels    = {,,}
+                ,xticklabels    = {,,}
+                ,axis x line    = bottom
+                ,axis y line    = left
+                ,domain         = 0:5
+                ]
+            \addplot[no marks, color=blue]{x};
+        \end{axis}
+    \end{tikzpicture}\centering
+    \caption {Provisioned Serverless Functions}
+    \label{graph:provisionedServerlessFunctions}
+\end{figure}
+
+Not only does the serverless compute solution scales \textbf{up} with increasing data ingress, it scales \textbf{down} after the load was successfully processed, proofing that this solution is truly elastic and scales automatically with every incoming message. This can be achieved because for new messages, a new micro-container instance is spun up and destroyed after the message was processed. 
 
 
 %===================================================================================================%
 \section{Comparison}\label{chp:suitComp}
 %===================================================================================================%
 
+While the non-serverless approach is very inelastic and needs to be pre-provisioned to operate, the serverless approach scaled in an automated and limitless way. No configurations had to be done for the AWS Lambda prototype to achieve this scalability. 
 
 %===================================================================================================%
 \section{Summary}
 %===================================================================================================%
+
+An \textit{Automated/Limitless Scalability} is not achievable with the non-serverless approach outlined in this study. 

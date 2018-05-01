@@ -20,17 +20,17 @@ $\Longrightarrow$
 \section{Systematic Literature Review Method}\label{sec:LitRes}
 %===================================================================================================%
 
-The selection and review of research literature is a crucial step towards a holistic understanding of the current state of academic discussion. It is thevrefore utmost important to conduct it in a systematic and structured way to avoid misinformation or inchoate results. An early attempt to formalize research literature reviews was made by Fink in 2005: \blockquote{[it is] a systematic, explicit,
+The selection and review of research literature is a crucial step towards a holistic understanding of the current state of academic discussion. It is therefore utmost important to conduct it in a systematic and structured way to avoid misinformation or inchoate results. An early attempt to formalize research literature reviews was made by Fink in 2005: \blockquote{[it is] a systematic, explicit,
 [comprehensive] and reproducible method for identifying, evaluating, and synthesizing
 the existing body of completed and recorded work produced by researchers, scholars, and
-practitioners}\autocite{Fink2015ConductingPaper}. Since this approach is rather generic in order to fit many areas of research, Okoli and Schabram vrefined this methodology in 2010 and adapted it for \acf{IS} research. \\
-According to Fink's definition, a proper and meticulous literature review is characterized by four important aspects. It should be \textit{systematic} in following a comprehensible methodological approach, \textit{explicit} in disclosing the way it was conducted, \textit{comprehensive} by including all relevant publications and thevrefore \textit{reproducible} and verifiable by others. 
+practitioners}\autocite{Fink2015ConductingPaper}. Since this approach is rather generic in order to fit many areas of research, Okoli and Schabram refined this methodology in 2010 and adapted it for \acf{IS} research. \\
+According to Fink's definition, a proper and meticulous literature review is characterized by four important aspects. It should be \textit{systematic} in following a comprehensible methodological approach, \textit{explicit} in disclosing the way it was conducted, \textit{comprehensive} by including all relevant publications and therefore \textit{reproducible} and verifiable by others. 
 
 \begin{figure}[ht]
     \includegraphics[width=0.8\linewidth]{images/methodology/litSearc.png}\centering
     \caption
     [Systematic Literature Review Method]
-    {Systematic Literature Review Method (\cite{Okoli2010AResearch})}
+    {Systematic Literature Review Method (Source: \cite{Okoli2010AResearch})}
     \label{fig:litSearch}
 \end{figure}
 
@@ -146,7 +146,7 @@ The following sections will traverse these four steps in order to conduct a \tex
         \includegraphics[width=\linewidth]{images/streaming/data_at_rest.png}\centering
         \caption
         [Data-at-Rest Architecture]
-        {Data-at-Rest Architecture (\cite{dataArtisans2017WhatProcessing})}
+        {Data-at-Rest Architecture (Source: \cite{dataArtisans2017WhatProcessing})}
         \label{fig:dataRest}
     \end{figure}
     
@@ -157,11 +157,11 @@ The following sections will traverse these four steps in order to conduct a \tex
         \includegraphics[width=\linewidth]{images/streaming/streming_data.png}\centering
         \caption
         [Stream Processing Architecture]
-        {Stream Processing Architecture (\cite{dataArtisans2017WhatProcessing})}
+        {Stream Processing Architecture (Source: \cite{dataArtisans2017WhatProcessing})}
         \label{fig:dataStream}
     \end{figure}
     
-    This seemingly minor change to the information flow has significant implications. To begin with, \acf{ESP} resembles the natural flow of data outside the IT system much closer than scheduled computation and is thevrefore easier to understand and design for. Secondly, since the event is processed immediately upon being received, the application can react instantly and a lag time between the occurrence of the event, the action trigger and the action itself can be avoided which results in a near real-time processing of information. 
+    This seemingly minor change to the information flow has significant implications. To begin with, \acf{ESP} resembles the natural flow of data outside the IT system much closer than scheduled computation and is therefore easier to understand and design for. Secondly, since the event is processed immediately upon being received, the application can react instantly and a lag time between the occurrence of the event, the action trigger and the action itself can be avoided which results in a near real-time processing of information. 
     
     This approach allows for a data- and computation-driven perspective on complex business problems that aims to provide dynamic insights and need to handle a steady input of information. 
     Due to recent trends in the industry such as IoT and Industry 4.0, the amount of data that has to be processed, categorized and analyzed skyrocketed. The data-ingress often consists of semi-structured sets and has to be transformed and handled in near real-time.\autocite{Dekate2017PredictsInfrastructure} In order to provide valuable business insights for companies and public sector players alike, this approach is likely not only a temporarily trend but rather a long lasting evolution of how data-centric enterprise systems are being designed. Moreover, a recent Gartner report predicts that the market for \acf{ESP} solutions will grow by 15\% annually from 2017 to 2022 (compound annual growth rate).\autocite{Heudecker2017MarketProcessing} \\
@@ -220,7 +220,7 @@ The following sections will traverse these four steps in order to conduct a \tex
     \includegraphics[width=\linewidth]{images/serverless/demyst.png}\centering
     \caption
     ["Serverless" compared to traditional approaches]
-    {"Serverless" compared to traditional approaches (\cite{Hammond2018DemystifyingComputing})}
+    {"Serverless" compared to traditional approaches (Source: \cite{Hammond2018DemystifyingComputing})}
     \label{fig:slessCompared}
 \end{figure}
 
@@ -252,7 +252,7 @@ Problems:
 "Serverless" is \textbf{the} new hype technology and is estimated to grow from USD 1.88 billion in 2016 to USD 7.72 billion by 2021, at a Compound Annual Growth Rate (CAGR) of 32.7\% according to "Markets and Research".\autocite{2017Function-as-a-Service2021} 
 
 Traditional approaches such as monolithic on-premise systems and even \acf{PaaS} based solutions or container clusters can be an option but have their own advantages and caveats. As shown in Figure~\vref{fig:slessCompared}, Hammond and Ryner identify six major categories to characterize architectural approaches.\\
-\textbf{State Management} is one of the areas where \textit{monolithic apps} have the most obvious advantage. The state is shared and global which reduces the required state management to a bare minimum. Since \textit{monolithic apps} are defined as one single system that offers many services using different interfaces that share the same global state. \autocite{Villamizar2015EvaluatingCloud} The management of this state is thevrefore not particularly complex and can be done inside of the system. For availability reasons, it might be a good idea to store the state redundantly but this is out of scope for the thesis and does not change the fact that the state of a \textit{monolithic app} is shared and global.\\
+\textbf{State Management} is one of the areas where \textit{monolithic apps} have the most obvious advantage. The state is shared and global which reduces the required state management to a bare minimum. Since \textit{monolithic apps} are defined as one single system that offers many services using different interfaces that share the same global state. \autocite{Villamizar2015EvaluatingCloud} The management of this state is therefore not particularly complex and can be done inside of the system. For availability reasons, it might be a good idea to store the state redundantly but this is out of scope for the thesis and does not change the fact that the state of a \textit{monolithic app} is shared and global.\\
 For a \textit{container app} on the other hand, state management is normally limited to the container. Since one of the main design principles of containerization is to confine the system within the boundaries of the container, it is possible to maintain a global shared state within the container itself but not to share it between all system services. If one container dies (e.g., reboot, failure, ...), it's state dies with it. Concepts like state-providers act as an external source of truth that can transfer and preserve state but often add complexity to the system and need to be implemented.\autocite{Ling2004SessionState}\\
 Similarly, state management in \textit{serverless applications} can be complex due to the confined nature of its code. Since the application is spun up on invocation and only lives on for the computation time it is not possible to maintain state throughout different function invocations.
 
@@ -260,5 +260,5 @@ Similarly, state management in \textit{serverless applications} can be complex d
 
 
 %===================================================================================================%
-\section{Summary}
+\section{Summary}\label{chp:backgroundEND}
 %===================================================================================================%

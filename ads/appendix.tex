@@ -15,12 +15,14 @@
 \pagebreak
 %\includepdf[pages=-,scale=.9,pagecommand={}]{Aufgabenstellung.pdf} % PDF um 10% verkleinert einbinden --> Kopf- und Fußzeile  werden so korrekt dargestellt. Die Option `pages' ermöglicht es, eine bestimmte Sequenz von Seiten (z.B. 2-10 oder `-' für alle Seiten) auszuwählen.
 \pagebreak
-\section*{A. Kinesis Data Generator CloudFormation Template}\label{app:cloudformation}
+\section*{A. Kinesis Data Generator CloudFormation Template}\label{app:KDG}
 
     \begin{lstlisting}[language=json,firstnumber=1]
     {
       "AWSTemplateFormatVersion" : "2010-09-09",
+      
       "Description" : "This template creates an Amazon Cognito User Pool and Identity Pool, with a single user.  It assigns a role to authenticated users in the identity pool to enable the users to use the Kinesis Data Generator tool.",
+      
       "Parameters" : {
     
         "Username": {
@@ -38,6 +40,7 @@
           "ConstraintDescription": " must be at least 6 alpha-numeric characters, and contain at least one number"
         }
       },
+      
       "Metadata": {
         "AWS::CloudFormation::Interface": {
           "ParameterGroups": [
@@ -53,6 +56,8 @@
           ]
         }
       },
+      
+      
       "Resources" : {
     
         "DataGenCognitoSetupLambdaFunc" : {
@@ -70,6 +75,7 @@
             "Timeout": 60
           }
         },
+        
         "LambdaExecutionRole": {
           "Type": "AWS::IAM::Role",
           "Properties": {
@@ -126,6 +132,7 @@
             }]
           }
         },
+        
         "SetupCognitoCustom" : {
           "Type": "Custom::DataGenCognitoSetupLambdaFunc",
           "Properties": {
@@ -140,6 +147,7 @@
     
           }
         },
+        
         "AuthenticatedUserRole": {
           "Type": "AWS::IAM::Role",
           "Properties": {
@@ -194,6 +202,7 @@
             }]
           }
         },
+        
         "UnauthenticatedUserRole": {
           "Type": "AWS::IAM::Role",
           "Properties": {
@@ -223,6 +232,7 @@
           }
         }
       },
+      
       "Outputs":{
         "KinesisDataGeneratorUrl": {
           "Description": "The URL for your Kinesis Data Generator.",
@@ -233,3 +243,52 @@
       }
     }
     \end{lstlisting}\centering\autocite{https://github.com/awslabs/amazon-kinesis-client-nodejs}
+
+\pagebreak
+
+\section*{B. Kinesis Stream and Lambda Processor CloudFormation Template}\label{app:ingressProcessSL}
+    \begin{lstlisting}[language=json,firstnumber=1]
+    {
+        "Resources": {
+        
+            "CelsiusIngress": {
+                "Type": "AWS::Kinesis::Stream",
+                "Properties": {
+                    "Name": "CelsiusIngress",
+                    "ShardCount": 10
+                }
+            },
+            
+            "celsiusToFahrenheit": {
+                "Type": "AWS::Lambda::Function",
+                "Properties": {
+                    "Handler": "index.handler",
+                    "Role": "arn:aws:iam::551473449163:role/lambda_kinesis_role",
+                    "Code": {
+                        "S3Bucket": "lambda-functions",
+                        "S3Key": "c2f.zip"
+                    },
+                    "Runtime": "nodejs8.10"
+                }
+            },
+            
+            "CelsiusEventSource": {
+                "Type": "AWS::Lambda::EventSourceMapping",
+                "Properties": {
+                    "Enabled": true,
+                    "StartingPosition": "LATEST",
+                    "BatchSize": 100,
+                    "FunctionName": {
+                        "Ref": "celsiusToFahrenheit"
+                    },
+                    "EventSourceArn": {
+                        "Fn::GetAtt": [
+                            "CelsiusIngress",
+                            "Arn"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+    \end{lstlisting}\centering

@@ -21,6 +21,8 @@ $\textbf{Cost per Month for 10 Instances} = \$69.84 * 10 = \textbf{\$698.40}$
 
 This costs are fixed and do not adapt to incoming load. 
 
+Besides these obvious and quantifiable costs, non-quantifiable costs like reduced development velocity due to provisioning constraints should be considered for a practical evaluation. Since these costs heavily depend on the real-life business case, they will not be calculated for this academic evaluation. They are, however, an important aspect of the overall viability domain and should not be forgotten. 
+
 %===================================================================================================%
 \section{Serverless}\label{chp:viaSL}
 %===================================================================================================%
@@ -46,23 +48,23 @@ Meaning that every time a Lambda function is invoked, a new \textit{request} is 
         $\longrightarrow$ with 128MB memory per Lambda invocation, costs of \$0.000000208 are generated for each 100ms of compute time. 
 \end{itemize}
 
-As identified in chapter~\vref{chp:operationalization}, the test case is defined as 10,000 messages per second and an average computation duration of 90ms per 500 messages, which results in the following cost considerations for one month (30 days): 
+As identified in chapter~\vref{chp:operationalization}, the test case is defined as 10,000 messages per second and an average computation duration of 90ms per 10 messages (resulting in a message batch size of 10), which results in the following cost considerations for one month (30 days): 
 
-$\textbf{Requests needed for 10k Messages} = 10000 / 500 = \textbf{20}$
+$\textbf{Requests needed for 10k Messages} = 10000 / 10 = \textbf{1000}$
 
-$\textbf{Requests per Month} = 20 * 60 * 60 * 24 * 30 = \textbf{51,840,000}$
+$\textbf{Requests per Month} = 10000 * 60 * 60 * 24 * 30 = \textbf{25,920,000,000}$
 
-$\textbf{Request Costs} = \ceil*{51,840,000 * \$0.0000002} = \textbf{\$10.17}$
+$\textbf{Request Costs} = \ceil*{25,920,000,000 * \$0.0000002} = \textbf{\$518.20}$
 
-$\textbf{Duration Costs} = \ceil*{(100ms / 100ms) * \$0.000000208 * 25,920,000,000} = \textbf{\$10.57}$
+$\textbf{Duration Costs} = \ceil*{(100ms / 100ms) * \$0.000000208 * 25,920,000,000} = \textbf{\$538.93}$
 
-$\textbf{Total Costs} = \$5,183.80 + \$10,782.31 = \textbf{\$20.75}$
+$\textbf{Total Costs} = \$5,183.80 + \$10,782.31 = \textbf{\$1057.13}$
 
 %===================================================================================================%
 \section{Comparison}\label{chp:viaComp}
 %===================================================================================================%
 
-With a total cost of $\$20.75$ per month, the serverless approach is far more affordable compared to the $\$698.40$ when using the non-serverless alternative. It is approximately $3,300\%$ cheaper for the best-case scenario of a constant and continuous load. When confronted with idle time, the cost saving would only increase.
+With a total cost of $\$1057.13$ per month, the serverless approach is much more expensive compared to the $\$698.40$ when using the non-serverless alternative. It is approximately $51.36\%$ cheaper for the best-case scenario of a constant and continuous load. 
 
 %===================================================================================================%
 \section{Summary}
@@ -70,4 +72,4 @@ With a total cost of $\$20.75$ per month, the serverless approach is far more af
 
 The non-serverless costs are fixed and do not adapt to incoming load. 10 AWS EC2 C5.large container instances are employed to process the incoming messages.\\
 Serverless functions are billed by \textit{requests} (number of invocations) and \textit{duration} (time a  function is running rounded to the next 100ms).\\
-With a total cost of $\$20.75$ per month, the serverless approach is far more affordable compared to the $\$698.40$ when using the non-serverless alternative. It is approximately $3,300\%$ cheaper for the best-case scenario of a constant and continuous load. When confronted with idle time, the cost saving would only increase.
+With a total cost of $\$1057.13$ per month, the serverless approach is much more expensive compared to the $\$698.40$ when using the non-serverless alternative. It is approximately $51.36\%$ cheaper for the best-case scenario of a constant and continuous load. 

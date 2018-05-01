@@ -7,13 +7,6 @@
 \section{Introduction}
 %***************%
 
-\begin{figure}[ht]
-    \includegraphics[width=\linewidth]{images/methodology/viabFit.PNG}\centering
-    \caption
-    [Viability-Fit Matrix]
-    {Viability-Fit Matrix \cite{Liang2004IntroductionApplications}}
-\end{figure}
-
 In the following section, concepts and indices for measuring suitability and viability will be introduced. The insights presented in chapter~\vref{chp:background} will be the foundation for the requirements and operators since the current academic and professional understanding of the topic will be assumed as correct and holistic. The steps from section~\vref{sssec:reqEng} will be shortened for the upcoming sections on suitability and viability, since \textit{System Modeling} will be done in chapter~\vref{chp:prototyping} and validation is discussed in chapter~\vref{chp:suitabilityAssessment} and~\vref{chp:viabilityAssessment} respectively.  
 
 %***************%
@@ -26,7 +19,7 @@ The author defines \textit{suitability} as the measure of how well the prototype
     \includegraphics[width=0.7\linewidth]{images/methodology/ttf.jpg}\centering
     \caption
     [Task-Technology-Fit Model]
-    {Task-Technology-Fit Model \cite{Goodhue1995Task-TechnologyPerformance}}
+    {Task-Technology-Fit Model (Source: \cite{Goodhue1995Task-TechnologyPerformance})}
 \end{figure}
 
 \subsection{Identification of Requirements / Task Characteristics}
@@ -74,7 +67,7 @@ viability  measures the extent to which the environment or organization is ready
     \includegraphics[width=0.7\linewidth]{images/methodology/fvm.jpg}\centering
     \caption
     [Fit-Viability-Model]
-    {Fit-Viability-Model \cite{Liang2007AdoptionModel}}
+    {Fit-Viability-Model (Source: \cite{Liang2007AdoptionModel})}
 \end{figure}
 
 
@@ -127,7 +120,7 @@ In order to select a set of important system's properties for the prototype eval
 
 As bipolar response categories the set \textit{Not Important} and \textit{Very Import} were chosen. In order to prevent respondents from so called "fence-sitting" (choosing the most neutral response option), an even number of scale points was used. To improve the reliability furthermore, the forced-choice response set was extended to six feedback options since a low scale score variability is expected.\autocite{Brill2008LikertScale} Similarly, a set of consecutive integers (i.e., 1, 2, 3, 4, 5, 6) was used to label the response scale to emphasize the equidistance between the options. Consequently, this setup results in an ordinal level of measurement, which can be processed by parametric statistics to gain insights on how to construct the test cases. \\
 The evaluation of this survey's results will lead to one distinct system characteristic each for \textit{suitability} and \textit{viability}. For each domain, the system property with the highest measured importance among the respondents will be chosen due to the limited time and scope of this research. \\
-Likert scales are subject to several academic inaccuracies and response distortion. To begin with, central tendency (respondents tend to choose the most neutral and thevrefore most central response option\autocite{Schumacker2013CentralDispersion}) can occur due to the interviewees impulse to avoid extreme response categories. In addition, acquiescence bias can distort the results. It vrefers to the tendency of respondents to choose to agree with statements because of the intention to choose what they think is the appropriate or objectively "correct" answer.\autocite{Costello2015AcquiescenceEducation}\highcomma\autocite{Aichholzer2015ControllingTests} Similarly, social desirability bias may occur when respondents try to portray themselves in a specific way.\autocite{Grimm2010SocialBias} \\
+Likert scales are subject to several academic inaccuracies and response distortion. To begin with, central tendency (respondents tend to choose the most neutral and thevrefore most central response option\autocite{Schumacker2013CentralDispersion}) can occur due to the interviewees impulse to avoid extreme response categories. In addition, acquiescence bias can distort the results. It refers to the tendency of respondents to choose to agree with statements because of the intention to choose what they think is the appropriate or objectively "correct" answer.\autocite{Costello2015AcquiescenceEducation}\highcomma\autocite{Aichholzer2015ControllingTests} Similarly, social desirability bias may occur when respondents try to portray themselves in a specific way.\autocite{Grimm2010SocialBias} \\
 Since this survey does not address personal, moral or ethical topics, the biases mentioned above will not have a drastic influence on the results. Their impact is thevrefore neglectable. 
 
 
@@ -137,26 +130,26 @@ Since this survey does not address personal, moral or ethical topics, the biases
 
 The survey was hosted on \url{typeform.com}, utilizing the service's \textit{free} plan that limits to ten question items. The system characteristics described in chapter~\vref{lst:surveyItems} were used to derive Likert items. 
 Overall,
-25 responses were collected from
-37 unique visitors, which corresponds to a
-67.6\% completion rate. The average time to complete was 
-01:49 (one minute, fourty-six seconds).
+55 responses were collected from
+57 unique visitors, which corresponds to a
+96.49\% completion rate. The average time to complete was 
+01:49 (one minute, fourty-nine seconds).
 100\% of the respondents answered every question.
 
 \begin{minipage}{\textwidth}
     The results are as follows:
     
-    \begin{enumerate}[nolistsep]\label{lst:surveyResults}
-        \item \textbf{Automated/Limitless Scaling} Average: 4.6
-        \item \textbf{Event-Driven Design} Average: 4.6
-        \item \textbf{Low Latency} Average: 4
-        \item \textbf{Failure Resilience} Average: 3.2
-        \item \textbf{Message Throughput} Average: 4.6
-        \item \textbf{Ease of Development} Average: 5.6
-        \item \textbf{Ease of Operation} Average: 4.3
-        \item \textbf{Feature Velocity} Average: 4
-        \item \textbf{Low Vendor Lock-In} Average: 5.1
-        \item \textbf{Cost} Average: 5.1
+    \begin{enumerate}[nolistsep]\label{lst:surveyResults1}
+        \item \textit{Automated/Limitless Scaling} Average: 5.1
+        \item \textit{Event-Driven Design} Average: 4.6
+        \item \textit{Low Latency} Average: 4
+        \item \textit{Failure Resilience} Average: 3.2
+        \item \textit{Message Throughput} Average: 4.6
+        \item \textit{Ease of Development} Average: 4.3
+        \item \textit{Ease of Operation} Average: 4.3
+        \item \textit{Feature Velocity} Average: 4
+        \item \textit{Low Vendor Lock-In} Average: 4.3
+        \item \textit{Cost} Average: 4.9
     \end{enumerate}
 \end{minipage}
 

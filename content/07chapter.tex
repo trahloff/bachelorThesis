@@ -9,7 +9,7 @@ After evaluating different requirements and therefore task and environment chara
 
 To ensure comparability between both prototypes, basic architecture will remain the same for each system. AWS Kinesis Data-Streams\footnote{\url{https://aws.amazon.com/kinesis/data-streams/}} will be used as a Event-Stream provider and only the data-processing approach will differ between those two prototypes. 
 
-In the following, these prototypes will be discussed and their architecture will be outlined in order to provide the reader a comprehensive insight into the systematic research conducted by the author and thevrefore ensure the explicit and reproducible nature of this paper. 
+In the following, these prototypes will be discussed and their architecture will be outlined in order to provide the reader a comprehensive insight into the systematic research conducted by the author and therefore ensure the explicit and reproducible nature of this paper. 
 
 
 
@@ -17,7 +17,7 @@ In the following, these prototypes will be discussed and their architecture will
 \section{Event-Stream}\label{chp:protoEvent-Stream}
 %===================================================================================================%
 
-To generate the incoming messages, the AWS Kinesis Data Generator Project\footnote{\url{https://github.com/awslabs/amazon-kinesis-data-generator}} is used. The AWS CloudFormation service is used to provision a simple data-generator instance. The template used to to so can be seen in the appendix A on page~\pageref{app:cloudformation}. It is a web client that uses user-supplied parameters to create messages on the data-stream. 
+To generate the incoming messages, the AWS Kinesis Data Generator Project\footnote{\url{https://github.com/awslabs/amazon-kinesis-data-generator}} is used. The AWS CloudFormation service is used to provision a simple data-generator instance. The template used to to so can be seen in the appendix A on page~\pageref{app:KDG}. It is a web client that uses user-supplied parameters to create messages on the data-stream. 
 
 %===================================================================================================%
 \section{Non-Serverless}\label{chp:protoNSL}
@@ -47,7 +47,7 @@ $\textbf{outgoing-read-bandwidth-in-KB} = \\
 $\textbf{\# Consumers} = \\
 max(\text{incoming-write-bandwidth-in-KB}/1000, \text{outgoing-read-bandwidth-in-KB}/2000)$
 
-Meaning, that either the incoming write bandwidth in Kilobyte divided by 1000 or, the outgoing read bandwidth in Kilobyte divided by 2000 determines the amount of consumers needed depending which of both measurements is higher. The \textit{number-of-consumers} is in this scenario equal to $1$, since the consumer poses as one logical consumer that is scaled horizontally. The \textit{average-data-size-in-KB} is rounded to 1 Kilobyte (see chapter~\vref{fig:messagePayload}), which results in 10 deployed consumer instances. 
+Meaning, that either the incoming write bandwidth in Kilobyte divided by 1000 or, the outgoing read bandwidth in Kilobyte divided by 2000 determines the amount of consumers needed depending which of both measurements is higher. The \textit{number-of-consumers} is in this scenario equal to $1$, since the consumer poses as one logical consumer that is scaled horizontally. The \textit{average-data-size-in-KB} is rounded to 1 Kilobyte (see chapter~\vref{fig:messagePayload}), which results in 10 deployed consumer instances.  
 
 Using the official client library\footnote{\url{https://github.com/awslabs/amazon-kinesis-client-nodejs}}, 10 consumer instances have to be deployed to sufficiently process the incoming stream. Utilized are the AWS EC2 C5 instances, which are recommended for this type of workload\footnote{\url{https://aws.amazon.com/ec2/instance-types/}}. For evaluation of processing power, the different types of C5 instances would have to be considered, since they are equipped with different CPU and RAM kits but since this study focuses on general scalability (which is constraint by the architectural pattern and not be the raw compute power for the non-serverless approach) and costs, the cheapest option "C5.large" is used. 
 
@@ -98,7 +98,8 @@ The serverless compute prototype will be implemented using AWS Lambda. Due to th
     \label{code:slProcessor}
 \end{figure}
 
-Performance, scaling, invocation and duration metrics are gathered with the AWS Service "CloudWatch", which records the measurements and is not open source. It is assumed that the metrics gathered are correct.
+The full stack, defined as a AWS CloudFormation Template can be seen in appendix B. \vref{app:ingressProcessSL}. It is a simple Lambda deployment with no special configurations and an EventSourceMapping to a Kinesis Stream Ingress that ensures that a Lambda function is triggered for new messages in the stream.\\
+Performance, scaling, invocation and duration metrics are gathered with the AWS Service "CloudWatch", which records the measurements and is not open source. It is assumed that the metrics gathered are correct. It is a simple web service that enables the user to view in-depth statistics on his deployed applications and services. In addition, AWS X-Ray, which is a services that aggregates AWS CloudWatch metrics and traces single requests is used for a more high-level overview of the service's performance. 
 
 
 %===================================================================================================%
@@ -107,4 +108,4 @@ Performance, scaling, invocation and duration metrics are gathered with the AWS 
 
 Using AWS Kinesis as an Event-Stream and AWS Kinesis Data Generator, data ingress (i.e., messages) are generated that will be processed by long-running containers for the non-serverless prototype and AWS Lambda functions that run NodeJS8.10 for the serverless approach.\\
 Due to architectural constraints, the number of non-serverless data-consumers is predefined and they have to be manually deployed. For the serverless approach on the other hand, only the processing logic has to be supplied as code. Provisioning of instances and invocation of functions is entirely done by the platform. \\
-Recording of measurements is done by the AWS Service "Cloudwatch".
+Recording of measurements is done by the AWS Service "CloudWatch".

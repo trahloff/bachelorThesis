@@ -22,10 +22,10 @@ Consequently, various definition attempts were made:
 
 \begin{enumerate}
     \item \textbf{Roberts}\\
-        "[Serverless refers to] custom code that's run in ephemeral containers (Function as a Service or "FaaS").[...] Such architectures remove the need for the traditional 'always on' server system sitting behind an application. Depending on the circumstances, such systems can significantly reduce operational cost and complexity."~\cfcite{Roberts2016ServerlessArchitectures}
+        "[Serverless refers to] custom code that's run in ephemeral containers (Function as a Service or "FaaS").[...] Such architectures remove the need for the traditional 'always on' server system sitting behind an application. Depending on the circumstances, such systems can significantly reduce operational cost and complexity."~\autocite{Roberts2016ServerlessArchitectures}
     \item \textbf{Hammond, Rymer} \\
         "Serverless is an approach to development that removes their need to care about servers: provisioning, setting up, configuring, or otherwise interacting with them. Beyond that, the name connotes a new architectural approach and operating principles. A serverless architecture encompasses multiple development services, the most notable of which are FaaS offerings like Amazon lambda, Google cloud Functions, Microsoft Azure Functions, and the Fx, OpenWhisk, and Riff open source projects.\\
-        These services share four core elements. They: Support deployment of arbitrary business logic [...], Decouple state and compute [...], Automatically invoke and scale deployed logic [...], Support event sources and sinks [...]"~\cfcite{Hammond2018DemystifyingComputing}
+        These services share four core elements. They: Support deployment of arbitrary business logic [...], Decouple state and compute [...], Automatically invoke and scale deployed logic [...], Support event sources and sinks [...]"~\autocite{Hammond2018DemystifyingComputing}
     \item \textbf{Johnston}\\
         "A Serverless solution is one that costs you nothing to run if nobody is using it (excluding data storage). [...] So you would be paying for the storage of data, but not for idling servers.
         While the system is always available, it’s not always “on”.
@@ -33,7 +33,7 @@ Consequently, various definition attempts were made:
         Serverless isn’t (and never was) about “no servers”, at least not in the way that we would think about it.
         Serverless isn’t about just scalability.
         Serverless isn’t about Functions (FaaS) only, because you can always run non-Serverless elements and then pay for idle.
-        A Serverless system such as this would be very low on maintenance too and is inherently event driven. If it wasn’t event-driven, then you’d need to pay to ensure that a system is always available and idle (like an EC2 instance)"~\cfcite{Johnston2017AServerless}
+        A Serverless system such as this would be very low on maintenance too and is inherently event driven. If it wasn’t event-driven, then you’d need to pay to ensure that a system is always available and idle (like an EC2 instance)"~\autocite{Johnston2017AServerless}
     \item \textbf{Kehoe}\\
         "Like so many things in life, serverless is not an all-or-nothing proposition. It’s a spectrum — and more than that, it has multiple dimensions along which the degree of serverlessness can vary.
         For a service to be “more serverless”, it needs to move in one or more of the following directions:
@@ -42,7 +42,7 @@ Consequently, various definition attempts were made:
             \item Tighter correspondence between resources used and resources billed
             \item Smaller and more abstracted control plane
         \end{enumerate}
-        [...] Serverless is, at a functional level, about lower operations burden and faster time to market."~\cfcite{Kehoe2017TheSpectrum}
+        [...] Serverless is, at a functional level, about lower operations burden and faster time to market."~\autocite{Kehoe2017TheSpectrum}
     \item \textbf{Castro et. al.}\\\label{castro}
         "[Serverless is] a cloud-native platform 
         for
@@ -52,19 +52,19 @@ Consequently, various definition attempts were made:
         which 
         scales up and down instantly and automatically
         and
-        charges for actual usage at a millisecond granularity"~\cfcite{Castro2017ServerlessService}
+        charges for actual usage at a millisecond granularity"~\autocite{Castro2017ServerlessService}
     \item \textbf{Amazon Web Services}\\
         "Serverless computing allows you to build and run applications and services without thinking about servers. Serverless applications don't require you to provision, scale, and manage any servers. You can build them for nearly any type of application or backend service, and everything required to run and scale your application with high availability is handled for you."~\cfcite{AmazonWebServices2017ServerlessServices}
     \item \textbf{Microsoft Azure}\\
-        "Serverless computing is the abstraction of servers, infrastructure, and operating systems. When you build serverless apps you don’t need to provision and manage any servers, so you can take your mind off infrastructure concerns. Serverless computing is driven by the reaction to events and triggers happening in near-real-time—in the cloud. As a fully managed service, server management and capacity planning are invisible to the developer and billing is based just on resources consumed or the actual time your code is running."~\cfcite{MicrosoftAzure2017ServerlessAzure}
+        "Serverless computing is the abstraction of servers, infrastructure, and operating systems. When you build serverless apps you don’t need to provision and manage any servers, so you can take your mind off infrastructure concerns. Serverless computing is driven by the reaction to events and triggers happening in near-real-time—in the cloud. As a fully managed service, server management and capacity planning are invisible to the developer and billing is based just on resources consumed or the actual time your code is running."~\autocite{MicrosoftAzure2017ServerlessAzure}
     \item \textbf{serverless.com}\\
         "The serverless movement started with the release of AWS Lambda, a Function-as-a-Service (FaaS) compute service. But serverless is much more than just FaaS.\\
-        Ultimately, serverless is about focusing your efforts on what provides value to your users. This means using managed services for databases, search indexes, queues, SMS messaging, and email delivery. It means tying these services together using stateless, ephemeral compute like the various FaaS offerings."~\cfcite{ServerlessTeam2017WhyServerless}
+        Ultimately, serverless is about focusing your efforts on what provides value to your users. This means using managed services for databases, search indexes, queues, SMS messaging, and email delivery. It means tying these services together using stateless, ephemeral compute like the various FaaS offerings."~\autocite{ServerlessTeam2017WhyServerless}
 \end{enumerate}
 
 In context of this study, Mike Roberts' definition will be used as a foundation to understand the topic since it is the most universally applicable and open description among the options. Other definition attempts, such as \textbf{Hammod and Rymer}, will be used to discuss serverless system properties in depth.
 
-To understand this very broad definition of "serverless", the first step is to understand what a server is and how a serverless system differs from it. \textquote{A server is a computer designed to process requests and deliver data to another computer over the internet or a local network}~\cfcite{Mitchell.Bradley2018TheServer}, meaning that a server poses as an accessible endpoint that waits for requests from clients and responds to them. It is \textit{continuously} running, even if there is no task to be processed in order to be ready for incoming requests. This waiting-time is called 'idle time' and presents the most significant difference between servers and serverless systems: while the server waits for incoming requests to process them, in a serverless context a computational unit is created for every incoming request.
+To understand this very broad definition of "serverless", the first step is to understand what a server is and how a serverless system differs from it. \textquote{A server is a computer designed to process requests and deliver data to another computer over the internet or a local network}~\autocite{Mitchell.Bradley2018TheServer}, meaning that a server poses as an accessible endpoint that waits for requests from clients and responds to them. It is \textit{continuously} running, even if there is no task to be processed in order to be ready for incoming requests. This waiting-time is called 'idle time' and presents the most significant difference between servers and serverless systems: while the server waits for incoming requests to process them, in a serverless context a computational unit is created for every incoming request.
 
 \begin{figure}[ht]
     \includegraphics[width=0.9\linewidth]{images/drawio/3tier-oneclient.png}\centering
@@ -102,7 +102,8 @@ The amount of steps that have to be performed concurrently to process every requ
     \label{graph:provisionedComputePowerServer}
 \end{figure}
 
-Comparatively in a serverless approach, the function that executes the steps necessary to fulfill the request is initiated with its own small runtime. How this works from a technical perspective is discussed later on in chapter~\vref{sec:serverless}. A drastically simplified sketch of this approach can be seen in Figure~\vref{fig:serverlessArchHighlevel}. The gateway is an API endpoint that reroutes incoming requests to a server, or in this case to a serverless function that is in turn instantiated. ~\cfcite{Kelly2010UsingInvalidation} This gateway distributes the calls to the newly spun-up functions which is called "fan-out"~\cfcite{Do2013Limplock}, a term that describes how the system structure fans out after the gateway.
+Comparatively in a serverless approach, the function that executes the steps necessary to fulfill the request is initiated with its own small runtime. How this works from a technical perspective is discussed later on in chapter~\vref{sec:serverless}. A drastically simplified sketch of this approach can be seen in Figure~\vref{fig:serverlessArchHighlevel}. The gateway is an API endpoint that reroutes incoming requests to a server, or in this case to a serverless function that is in turn instantiated. ~\cfcite{Kelly2010UsingInvalidation} 
+This gateway distributes the calls to the newly spun-up functions which is called "fan-out"~\cfcite{Do2013Limplock}, a term that describes how the system structure fans out after the gateway.
 
 \begin{figure}[ht]
     \includegraphics[width=\linewidth]{images/drawio/lambda.png}\centering
@@ -159,7 +160,7 @@ Academically speaking, serverless \textit{computing} architectures have been a t
     \item 
         \textbf{Malawski et. el.} focus on the specific use case of scientific workflows. In a research context, they introduce the academic field of experiments as a complex and important environment for computation approaches. Despite the commonly advertised use of serverless functions as background task runner for Web applications, Malawski et. al. evaluate their applicability on compute- and dataintensive workloads. Using Google Cloud Functions coupled with the HyperFlow workflow engine, the team present a prototype that is capable of running as a task on the Google Cloud Infrastructure, staging data to and from Cloud storage and can execute custom application binaries. The study concludes that the prototype is indeed suited for scientific workloads, demonstrated with the Montage\footnote{\url{http://montage.ipac.caltech.edu/}} astronomic workflow.~\cfcite{Malawski2017ServerlessFunctions}
     \item 
-        \textbf{Castro et. al.} identify key characteristics and use cases of serverless architectures. In addition, they describe technical challenges and discuss problems that can occur in various environments.
+        \textbf{Castro et. al.} identify key characteristics and use cases of serverless architectures. In addition, they describe technical challenges and discuss problems that can occur in various environments.~\cfcite{Castro2017ServerlessService}
     \item
         \textbf{Bila et. al.} explore the design of an automated thread mitigation system based on a serverless architecture. They argue that the typical mitigation workflow is inherent event-driven and is therefore a great fit to be implemented in a serverless architecture.  ~\cfcite{Bila2017LeveragingContainers}
 \end{enumerate}
